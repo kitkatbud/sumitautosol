@@ -6,44 +6,57 @@
 <title>Book — Summit Auto Solutions</title>
 <link rel="stylesheet" href="style.css"/>
 <style>
-  .book-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;padding:4rem 2.5rem;}
-  .book-intro{font-size:15px;font-weight:300;line-height:1.7;color:rgba(28,43,58,0.55);margin-bottom:2.5rem;max-width:440px;}
-  .step-label{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#4a7fa5;margin-bottom:0.4rem;}
-  .step-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:#1c2b3a;margin-bottom:1.5rem;}
-  .staff-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-  .staff-card{
-    background:#fff;border:0.5px solid rgba(28,43,58,0.1);border-radius:6px;
-    padding:1.75rem;display:flex;flex-direction:column;align-items:center;gap:0.75rem;
-    cursor:pointer;transition:box-shadow 0.3s,transform 0.2s,border-color 0.2s;
-    text-align:center;
-  }
-  .staff-card:hover{box-shadow:0 8px 28px rgba(28,43,58,0.1);transform:translateY(-2px);border-color:#4a7fa5;}
-  .staff-avatar{
-    width:72px;height:72px;border-radius:50%;
-    background:rgba(74,127,165,0.1);
-    border:2px solid rgba(74,127,165,0.3);
-    display:flex;align-items:center;justify-content:center;
-    font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;color:#4a7fa5;
-  }
-  .staff-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:#1c2b3a;}
-  .staff-role{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(28,43,58,0.35);}
-  .staff-link{
-    display:inline-block;margin-top:0.5rem;
-    background:#1c2b3a;color:#f0f2f5;
-    border:none;padding:9px 20px;
-    font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;
-    letter-spacing:0.08em;text-transform:uppercase;
-    border-radius:2px;cursor:pointer;
-    transition:background 0.2s;width:100%;text-align:center;
-  }
-  .staff-link:hover{background:#4a7fa5;}
-  .book-sidebar{background:var(--dark);border-radius:6px;padding:2.5rem;color:var(--snow);height:fit-content;}
-  .sidebar-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--snow);margin-bottom:1.5rem;}
-  .sidebar-service{padding:1rem 0;border-bottom:0.5px solid rgba(240,242,245,0.06);}
-  .sidebar-service:last-child{border-bottom:none;}
-  .sidebar-service-name{font-size:14px;color:rgba(240,242,245,0.8);margin-bottom:0.2rem;}
-  .sidebar-service-detail{font-size:12px;color:rgba(240,242,245,0.35);display:flex;gap:1rem;}
-  .sidebar-note{margin-top:1.5rem;font-size:13px;font-weight:300;line-height:1.65;color:rgba(240,242,245,0.35);}
+  .book-wrapper{max-width:960px;margin:0 auto;padding:4rem 2.5rem;}
+  .steps{display:flex;gap:0;margin-bottom:3rem;border:0.5px solid var(--border);border-radius:4px;overflow:hidden;}
+  .step{flex:1;padding:1rem 1.5rem;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);background:#fff;border-right:0.5px solid var(--border);cursor:default;transition:all 0.2s;}
+  .step:last-child{border-right:none;}
+  .step.active{background:var(--dark);color:var(--snow);}
+  .step.done{background:rgba(74,127,165,0.08);color:var(--accent);}
+  .step-num{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;display:block;margin-bottom:2px;}
+  .panel{display:none;}
+  .panel.active{display:block;}
+  .staff-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:520px;}
+  .staff-card{background:#fff;border:0.5px solid var(--border);border-radius:6px;padding:2rem;display:flex;flex-direction:column;align-items:center;gap:0.75rem;cursor:pointer;transition:box-shadow 0.3s,transform 0.2s,border-color 0.2s;text-align:center;}
+  .staff-card:hover{box-shadow:0 8px 28px rgba(28,43,58,0.1);transform:translateY(-2px);border-color:var(--accent);}
+  .staff-card.selected{border-color:var(--accent);border-width:2px;background:rgba(74,127,165,0.04);}
+  .staff-avatar{width:72px;height:72px;border-radius:50%;background:rgba(74,127,165,0.1);border:2px solid rgba(74,127,165,0.25);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--accent);}
+  .staff-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:var(--ink);}
+  .staff-role{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);}
+  .service-options{display:flex;flex-direction:column;gap:12px;max-width:580px;}
+  .service-option{background:#fff;border:0.5px solid var(--border);border-radius:6px;padding:1.5rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:border-color 0.2s,box-shadow 0.2s;}
+  .service-option:hover{border-color:var(--accent);box-shadow:0 4px 16px rgba(28,43,58,0.07);}
+  .service-option.selected{border-color:var(--accent);border-width:2px;background:rgba(74,127,165,0.04);}
+  .service-option-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:var(--ink);}
+  .service-option-dur{font-size:12px;color:var(--ink3);margin-top:2px;}
+  .service-option-price{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--ink);}
+  .datetime-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:580px;}
+  .time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:0.5rem;}
+  .time-slot{background:#fff;border:0.5px solid var(--border);border-radius:2px;padding:8px 10px;font-size:13px;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;color:var(--ink);}
+  .time-slot:hover{border-color:var(--accent);}
+  .time-slot.selected{background:var(--dark);color:var(--snow);border-color:var(--dark);}
+  .booking-form{max-width:580px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .form-group{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.25rem;}
+  .form-group label{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);}
+  .form-group input{background:#fff;border:0.5px solid var(--border);border-radius:2px;padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);outline:none;transition:border-color 0.2s;width:100%;}
+  .form-group input:focus{border-color:var(--accent);}
+  .summary-box{background:var(--dark);border-radius:6px;padding:2rem;margin-bottom:2rem;max-width:580px;}
+  .summary-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--snow);margin-bottom:1.25rem;}
+  .summary-row{display:flex;justify-content:space-between;font-size:14px;padding:6px 0;border-bottom:0.5px solid rgba(240,242,245,0.06);}
+  .summary-row:last-child{border-bottom:none;}
+  .summary-label{color:rgba(240,242,245,0.4);}
+  .summary-value{color:rgba(240,242,245,0.85);}
+  .panel-nav{display:flex;gap:1rem;margin-top:2rem;align-items:center;}
+  .btn-back{background:transparent;color:var(--ink2);border:0.5px solid var(--border);padding:10px 22px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:border-color 0.2s;}
+  .btn-back:hover{border-color:var(--accent);color:var(--accent);}
+  .btn-next{background:var(--dark);color:var(--snow);border:none;padding:11px 28px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:background 0.2s;}
+  .btn-next:hover{background:var(--accent);}
+  .btn-next:disabled{opacity:0.4;cursor:not-allowed;}
+  .success-panel{text-align:center;padding:4rem 2rem;max-width:520px;margin:0 auto;}
+  .success-icon{width:64px;height:64px;border-radius:50%;background:rgba(74,127,165,0.1);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:28px;color:var(--accent);}
+  .success-title{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:400;color:var(--ink);margin-bottom:0.75rem;}
+  .success-sub{font-size:15px;font-weight:300;line-height:1.7;color:var(--ink2);}
+  .error-msg{background:rgba(200,50,50,0.08);border:0.5px solid rgba(200,50,50,0.25);border-radius:4px;padding:0.75rem 1rem;font-size:13px;color:#c03232;margin-bottom:1rem;display:none;}
 </style>
 </head>
 <body>
@@ -65,56 +78,282 @@
 <div class="page-header">
   <p class="page-header-eyebrow">Schedule your detail</p>
   <h1 class="page-header-title">Book an <em>Appointment</em></h1>
-  <p class="page-header-sub">Choose your detailer below and you'll be taken directly to their live calendar to pick a date and time that works for you.</p>
 </div>
 
-<div class="book-layout">
-  <div>
-    <div class="step-label">Step 1 — Choose your detailer</div>
-    <h2 class="step-title">Who would you like to book with?</h2>
+<div class="book-wrapper">
+
+  <div class="steps">
+    <div class="step active" id="step1"><span class="step-num">01</span>Detailer</div>
+    <div class="step" id="step2"><span class="step-num">02</span>Service</div>
+    <div class="step" id="step3"><span class="step-num">03</span>Date & Time</div>
+    <div class="step" id="step4"><span class="step-num">04</span>Your Info</div>
+  </div>
+
+  <!-- STEP 1: DETAILER -->
+  <div class="panel active" id="panel1">
+    <p class="section-tag">Step 1</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;color:var(--ink);margin-bottom:1.75rem;">Who would you like to book with?</h2>
     <div class="staff-grid">
-      <div class="staff-card">
+      <div class="staff-card" onclick="selectDetailer('Hudson', this)">
         <div class="staff-avatar">H</div>
         <div class="staff-name">Hudson</div>
         <div class="staff-role">Lead Detailer</div>
-        <a href="https://northridgedetailing.setmore.com/book" target="_blank" class="staff-link">View Availability →</a>
       </div>
-      <div class="staff-card">
+      <div class="staff-card" onclick="selectDetailer('Jordan', this)">
         <div class="staff-avatar">J</div>
         <div class="staff-name">Jordan</div>
         <div class="staff-role">Detailer</div>
-        <a href="https://northridgedetailing.setmore.com/book" target="_blank" class="staff-link">View Availability →</a>
       </div>
     </div>
-    <p style="font-size:13px;color:rgba(28,43,58,0.4);margin-top:1.25rem;font-weight:300;">Clicking view availability takes you directly to their calendar on our booking platform.</p>
+    <div class="panel-nav">
+      <button class="btn-next" id="next1" disabled onclick="goTo(2)">Continue →</button>
+    </div>
   </div>
 
-  <div class="book-sidebar">
-    <div class="sidebar-title">Our Services</div>
-    <div class="sidebar-service">
-      <div class="sidebar-service-name">Interior Detail</div>
-      <div class="sidebar-service-detail"><span>$100</span><span>1 hr 40 min</span></div>
+  <!-- STEP 2: SERVICE -->
+  <div class="panel" id="panel2">
+    <p class="section-tag">Step 2</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;color:var(--ink);margin-bottom:1.75rem;">Which service do you need?</h2>
+    <div class="service-options">
+      <div class="service-option" onclick="selectService('Interior Detail','$100','1 hr 40 min',this)">
+        <div><div class="service-option-name">Interior Detail</div><div class="service-option-dur">1 hr 40 min</div></div>
+        <div class="service-option-price">$100</div>
+      </div>
+      <div class="service-option" onclick="selectService('Interior + Exterior','$150','2 hrs',this)">
+        <div>
+          <div class="service-option-name">Interior + Exterior</div>
+          <div class="service-option-dur">2 hrs &nbsp;·&nbsp;<span style="color:var(--accent);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;">Best Value</span></div>
+        </div>
+        <div class="service-option-price">$150</div>
+      </div>
+      <div class="service-option" onclick="selectService('Exterior Wash & Wax','$60','45 min',this)">
+        <div><div class="service-option-name">Exterior Wash & Wax</div><div class="service-option-dur">45 min</div></div>
+        <div class="service-option-price">$60</div>
+      </div>
     </div>
-    <div class="sidebar-service">
-      <div class="sidebar-service-name">Interior + Exterior</div>
-      <div class="sidebar-service-detail"><span>$150</span><span>2 hrs</span></div>
-    </div>
-    <div class="sidebar-service">
-      <div class="sidebar-service-name">Exterior Wash & Wax</div>
-      <div class="sidebar-service-detail"><span>$60</span><span>45 min</span></div>
-    </div>
-    <p class="sidebar-note">You'll select your service after choosing a detailer on the booking page. Mon–Fri, 9 AM–5 PM only.</p>
-    <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:0.5px solid rgba(240,242,245,0.06);">
-      <div style="font-size:12px;color:rgba(240,242,245,0.3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.4rem;">Prefer to call?</div>
-      <a href="tel:8013484269" style="font-size:18px;color:#7ab3d4;font-family:'Cormorant Garamond',serif;">(801) 348-4269</a>
+    <div class="panel-nav">
+      <button class="btn-back" onclick="goTo(1)">← Back</button>
+      <button class="btn-next" id="next2" disabled onclick="goTo(3)">Continue →</button>
     </div>
   </div>
+
+  <!-- STEP 3: DATE & TIME -->
+  <div class="panel" id="panel3">
+    <p class="section-tag">Step 3</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;color:var(--ink);margin-bottom:1.75rem;">Pick a date and time</h2>
+    <div class="datetime-grid">
+      <div>
+        <div class="form-group">
+          <label>Date (Mon–Fri only)</label>
+          <input type="date" id="booking-date" onchange="handleDateChange(this)"/>
+        </div>
+        <p id="date-error" style="font-size:13px;color:#c03232;display:none;">Weekdays only (Mon–Fri).</p>
+      </div>
+      <div>
+        <div class="form-group">
+          <label>Available Times</label>
+          <div class="time-slots">
+            <div class="time-slot" onclick="selectTime('9:00 AM',this)">9:00 AM</div>
+            <div class="time-slot" onclick="selectTime('10:00 AM',this)">10:00 AM</div>
+            <div class="time-slot" onclick="selectTime('11:00 AM',this)">11:00 AM</div>
+            <div class="time-slot" onclick="selectTime('12:00 PM',this)">12:00 PM</div>
+            <div class="time-slot" onclick="selectTime('1:00 PM',this)">1:00 PM</div>
+            <div class="time-slot" onclick="selectTime('2:00 PM',this)">2:00 PM</div>
+            <div class="time-slot" onclick="selectTime('3:00 PM',this)">3:00 PM</div>
+            <div class="time-slot" onclick="selectTime('4:00 PM',this)">4:00 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-nav">
+      <button class="btn-back" onclick="goTo(2)">← Back</button>
+      <button class="btn-next" id="next3" disabled onclick="goTo(4)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: INFO -->
+  <div class="panel" id="panel4">
+    <p class="section-tag">Step 4</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;color:var(--ink);margin-bottom:1.75rem;">Your details</h2>
+    <div class="summary-box" id="booking-summary"></div>
+    <div class="error-msg" id="error-msg"></div>
+    <div class="booking-form">
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" id="fname" placeholder="John"/></div>
+        <div class="form-group"><label>Last Name</label><input type="text" id="lname" placeholder="Smith"/></div>
+      </div>
+      <div class="form-group"><label>Email</label><input type="email" id="email" placeholder="john@example.com"/></div>
+      <div class="form-group"><label>Phone (optional)</label><input type="tel" id="phone" placeholder="(801) 000-0000"/></div>
+    </div>
+    <div class="panel-nav">
+      <button class="btn-back" onclick="goTo(3)">← Back</button>
+      <button class="btn-next" id="submit-btn" onclick="submitBooking()">Confirm Booking →</button>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="panel" id="panel-success">
+    <div class="success-panel">
+      <div class="success-icon">✓</div>
+      <h2 class="success-title">You're booked.</h2>
+      <p class="success-sub">A confirmation has been sent to your email. We'll see you soon — if you need to reschedule call us at <strong>(801) 348-4269</strong>.</p>
+      <div style="margin-top:2.5rem;display:flex;gap:1rem;justify-content:center;">
+        <a href="index.html" class="btn-outline">Back to Home</a>
+        <a href="services.html" class="btn-cta">View Services</a>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <footer>
   <div class="footer-logo">Summit Auto Solutions</div>
   <span>(801) 348-4269 · Mon–Fri 9–5 · Utah</span>
 </footer>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+  const app = initializeApp({
+    apiKey: "AIzaSyAFN69H0F6zPqjOKZ-evKUZWSByXvvQQuQ",
+    authDomain: "summitautosol.firebaseapp.com",
+    projectId: "summitautosol",
+    storageBucket: "summitautosol.firebasestorage.app",
+    messagingSenderId: "116967321496",
+    appId: "1:116967321496:web:ee29f2d685f816eccb05ed"
+  });
+
+  const db = getFirestore(app);
+  window._db = db;
+  window._addDoc = addDoc;
+  window._collection = collection;
+</script>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  emailjs.init("wFyaJ2VQNG2SgkbJW");
+
+  const booking = { detailer:'', service:'', price:'', duration:'', date:'', time:'' };
+
+  function selectDetailer(name, el) {
+    booking.detailer = name;
+    document.querySelectorAll('.staff-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('next1').disabled = false;
+  }
+
+  function selectService(name, price, duration, el) {
+    booking.service = name;
+    booking.price = price;
+    booking.duration = duration;
+    document.querySelectorAll('.service-option').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('next2').disabled = false;
+  }
+
+  function handleDateChange(input) {
+    const d = new Date(input.value + 'T00:00:00');
+    const day = d.getDay();
+    const err = document.getElementById('date-error');
+    if (day === 0 || day === 6) {
+      err.style.display = 'block';
+      booking.date = '';
+      input.value = '';
+    } else {
+      err.style.display = 'none';
+      booking.date = input.value;
+    }
+    checkDateTime();
+  }
+
+  function selectTime(time, el) {
+    booking.time = time;
+    document.querySelectorAll('.time-slot').forEach(t => t.classList.remove('selected'));
+    el.classList.add('selected');
+    checkDateTime();
+  }
+
+  function checkDateTime() {
+    document.getElementById('next3').disabled = !(booking.date && booking.time);
+  }
+
+  function goTo(step) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.step').forEach((s, i) => {
+      s.classList.remove('active','done');
+      if (i + 1 < step) s.classList.add('done');
+      if (i + 1 === step) s.classList.add('active');
+    });
+    document.getElementById('panel' + step).classList.add('active');
+    if (step === 4) renderSummary();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function renderSummary() {
+    const dateFormatted = new Date(booking.date + 'T00:00:00').toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    document.getElementById('booking-summary').innerHTML = `
+      <div class="summary-title">Booking Summary</div>
+      <div class="summary-row"><span class="summary-label">Detailer</span><span class="summary-value">${booking.detailer}</span></div>
+      <div class="summary-row"><span class="summary-label">Service</span><span class="summary-value">${booking.service}</span></div>
+      <div class="summary-row"><span class="summary-label">Price</span><span class="summary-value">${booking.price}</span></div>
+      <div class="summary-row"><span class="summary-label">Duration</span><span class="summary-value">${booking.duration}</span></div>
+      <div class="summary-row"><span class="summary-label">Date</span><span class="summary-value">${dateFormatted}</span></div>
+      <div class="summary-row"><span class="summary-label">Time</span><span class="summary-value">${booking.time}</span></div>
+    `;
+  }
+
+  async function submitBooking() {
+    const fname = document.getElementById('fname').value.trim();
+    const lname = document.getElementById('lname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const errEl = document.getElementById('error-msg');
+
+    if (!fname || !lname || !email) {
+      errEl.style.display = 'block';
+      errEl.textContent = 'Please fill in your name and email.';
+      return;
+    }
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+    errEl.style.display = 'none';
+
+    const dateFormatted = new Date(booking.date + 'T00:00:00').toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    const params = {
+      customer_name: fname + ' ' + lname,
+      to_email: email,
+      customer_phone: phone || 'Not provided',
+      service: booking.service,
+      detailer: booking.detailer,
+      date: dateFormatted,
+      time: booking.time,
+      price: booking.price
+    };
+
+    try {
+      await window._addDoc(window._collection(window._db, 'bookings'), { ...params, createdAt: new Date().toISOString() });
+      await emailjs.send('service_mxno1sf', 'template_7xg78nt', params);
+      await emailjs.send('service_mxno1sf', 'template_g0a10zq', params);
+
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.step').forEach(s => s.classList.add('done'));
+      document.getElementById('panel-success').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    } catch(err) {
+      console.error(err);
+      errEl.style.display = 'block';
+      errEl.textContent = 'Something went wrong. Please try again or call (801) 348-4269.';
+      btn.disabled = false;
+      btn.textContent = 'Confirm Booking →';
+    }
+  }
+</script>
 
 </body>
 </html>
