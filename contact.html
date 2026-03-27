@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact — Summit Auto Solutions</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  .contact-layout{display:grid;grid-template-columns:1.1fr 0.9fr;gap:5rem;padding:4rem 2.5rem;}
+  .success-msg{display:none;background:rgba(74,127,165,0.08);border:0.5px solid rgba(74,127,165,0.25);border-radius:4px;padding:1rem 1.25rem;font-size:14px;color:#4a7fa5;margin-bottom:1.5rem;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Summit <span>Auto Solutions</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="book.html">Book</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="nav-phone">(801) 348-4269</span>
+    <a href="book.html" class="btn-main">Book Now</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <p class="page-header-eyebrow">Get in touch</p>
+  <h1 class="page-header-title">Contact <em>Us</em></h1>
+  <p class="page-header-sub">Questions about a service? Not sure which package is right for your car? We're happy to help.</p>
+</div>
+
+<div class="contact-layout">
+  <div>
+    <p class="section-tag" style="margin-bottom:0.5rem;">Send a message</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:400;color:#1c2b3a;margin-bottom:2rem;">We'll get back to you fast.</h2>
+
+    <div class="success-msg" id="success-msg">Message sent — we'll be in touch soon.</div>
+
+    <form id="contact-form" onsubmit="handleSubmit(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="fname" placeholder="John" required/>
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="lname" placeholder="Smith" required/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="john@example.com" required/>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone (optional)</label>
+        <input type="tel" id="phone" name="phone" placeholder="(801) 000-0000"/>
+      </div>
+      <div class="form-group">
+        <label for="service">Service interested in</label>
+        <select id="service" name="service">
+          <option value="">Not sure yet</option>
+          <option value="interior">Interior Detail — $100</option>
+          <option value="full">Interior + Exterior — $150</option>
+          <option value="exterior">Exterior Wash & Wax — $60</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Any questions, specific requests, or details about your vehicle..." required></textarea>
+      </div>
+      <button type="submit" class="btn-cta" style="width:100%;text-align:center;justify-content:center;">Send Message</button>
+      <p class="form-note">We typically respond within a few hours during business hours.</p>
+    </form>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:1.5rem;">
+    <div class="info-box">
+      <div class="info-box-title">Contact Info</div>
+      <div class="info-row">
+        <div class="info-label">Phone</div>
+        <div class="info-value"><a href="tel:8013484269">(801) 348-4269</a></div>
+      </div>
+      <div class="info-row">
+        <div class="info-label">Location</div>
+        <div class="info-value">Utah</div>
+      </div>
+      <div class="info-row">
+        <div class="info-label">Email</div>
+        <div class="info-value"><a href="mailto:contact@summitautosolutions.com">contact@summitautosolutions.com</a></div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <div class="info-box-title">Hours</div>
+      <div class="info-row">
+        <div class="info-label">Monday – Friday</div>
+        <div class="info-value" style="color:#7ab3d4;">9 AM – 5 PM</div>
+      </div>
+      <div class="info-row">
+        <div class="info-label">Saturday</div>
+        <div class="info-value">Closed</div>
+      </div>
+      <div class="info-row">
+        <div class="info-label">Sunday</div>
+        <div class="info-value">Closed</div>
+      </div>
+      <div style="margin-top:1.25rem;">
+        <a href="book.html" class="btn-cta" style="width:100%;text-align:center;display:block;">Book an Appointment →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Summit Auto Solutions</div>
+  <span>(801) 348-4269 · Mon–Fri 9–5 · Utah</span>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  document.getElementById('contact-form').style.opacity = '0.4';
+  document.getElementById('contact-form').style.pointerEvents = 'none';
+  document.getElementById('success-msg').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+
+</body>
+</html>

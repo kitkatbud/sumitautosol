@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Book — Summit Auto Solutions</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  .book-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;padding:4rem 2.5rem;}
+  .book-intro{font-size:15px;font-weight:300;line-height:1.7;color:rgba(28,43,58,0.55);margin-bottom:2.5rem;max-width:440px;}
+  .step-label{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#4a7fa5;margin-bottom:0.4rem;}
+  .step-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:#1c2b3a;margin-bottom:1.5rem;}
+  .staff-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .staff-card{
+    background:#fff;border:0.5px solid rgba(28,43,58,0.1);border-radius:6px;
+    padding:1.75rem;display:flex;flex-direction:column;align-items:center;gap:0.75rem;
+    cursor:pointer;transition:box-shadow 0.3s,transform 0.2s,border-color 0.2s;
+    text-align:center;
+  }
+  .staff-card:hover{box-shadow:0 8px 28px rgba(28,43,58,0.1);transform:translateY(-2px);border-color:#4a7fa5;}
+  .staff-avatar{
+    width:72px;height:72px;border-radius:50%;
+    background:rgba(74,127,165,0.1);
+    border:2px solid rgba(74,127,165,0.3);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;color:#4a7fa5;
+  }
+  .staff-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:#1c2b3a;}
+  .staff-role{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(28,43,58,0.35);}
+  .staff-link{
+    display:inline-block;margin-top:0.5rem;
+    background:#1c2b3a;color:#f0f2f5;
+    border:none;padding:9px 20px;
+    font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;
+    letter-spacing:0.08em;text-transform:uppercase;
+    border-radius:2px;cursor:pointer;
+    transition:background 0.2s;width:100%;text-align:center;
+  }
+  .staff-link:hover{background:#4a7fa5;}
+  .book-sidebar{background:var(--dark);border-radius:6px;padding:2.5rem;color:var(--snow);height:fit-content;}
+  .sidebar-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--snow);margin-bottom:1.5rem;}
+  .sidebar-service{padding:1rem 0;border-bottom:0.5px solid rgba(240,242,245,0.06);}
+  .sidebar-service:last-child{border-bottom:none;}
+  .sidebar-service-name{font-size:14px;color:rgba(240,242,245,0.8);margin-bottom:0.2rem;}
+  .sidebar-service-detail{font-size:12px;color:rgba(240,242,245,0.35);display:flex;gap:1rem;}
+  .sidebar-note{margin-top:1.5rem;font-size:13px;font-weight:300;line-height:1.65;color:rgba(240,242,245,0.35);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Summit <span>Auto Solutions</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="book.html" class="active">Book</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="nav-phone">(801) 348-4269</span>
+    <a href="book.html" class="btn-main">Book Now</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <p class="page-header-eyebrow">Schedule your detail</p>
+  <h1 class="page-header-title">Book an <em>Appointment</em></h1>
+  <p class="page-header-sub">Choose your detailer below and you'll be taken directly to their live calendar to pick a date and time that works for you.</p>
+</div>
+
+<div class="book-layout">
+  <div>
+    <div class="step-label">Step 1 — Choose your detailer</div>
+    <h2 class="step-title">Who would you like to book with?</h2>
+    <div class="staff-grid">
+      <div class="staff-card">
+        <div class="staff-avatar">H</div>
+        <div class="staff-name">Hudson</div>
+        <div class="staff-role">Lead Detailer</div>
+        <a href="https://northridgedetailing.setmore.com/book" target="_blank" class="staff-link">View Availability →</a>
+      </div>
+      <div class="staff-card">
+        <div class="staff-avatar">J</div>
+        <div class="staff-name">Jordan</div>
+        <div class="staff-role">Detailer</div>
+        <a href="https://northridgedetailing.setmore.com/book" target="_blank" class="staff-link">View Availability →</a>
+      </div>
+    </div>
+    <p style="font-size:13px;color:rgba(28,43,58,0.4);margin-top:1.25rem;font-weight:300;">Clicking view availability takes you directly to their calendar on our booking platform.</p>
+  </div>
+
+  <div class="book-sidebar">
+    <div class="sidebar-title">Our Services</div>
+    <div class="sidebar-service">
+      <div class="sidebar-service-name">Interior Detail</div>
+      <div class="sidebar-service-detail"><span>$100</span><span>1 hr 40 min</span></div>
+    </div>
+    <div class="sidebar-service">
+      <div class="sidebar-service-name">Interior + Exterior</div>
+      <div class="sidebar-service-detail"><span>$150</span><span>2 hrs</span></div>
+    </div>
+    <div class="sidebar-service">
+      <div class="sidebar-service-name">Exterior Wash & Wax</div>
+      <div class="sidebar-service-detail"><span>$60</span><span>45 min</span></div>
+    </div>
+    <p class="sidebar-note">You'll select your service after choosing a detailer on the booking page. Mon–Fri, 9 AM–5 PM only.</p>
+    <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:0.5px solid rgba(240,242,245,0.06);">
+      <div style="font-size:12px;color:rgba(240,242,245,0.3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.4rem;">Prefer to call?</div>
+      <a href="tel:8013484269" style="font-size:18px;color:#7ab3d4;font-family:'Cormorant Garamond',serif;">(801) 348-4269</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Summit Auto Solutions</div>
+  <span>(801) 348-4269 · Mon–Fri 9–5 · Utah</span>
+</footer>
+
+</body>
+</html>

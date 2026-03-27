@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Services — Summit Auto Solutions</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  .services-full{display:flex;flex-direction:column;gap:1px;background:rgba(28,43,58,0.1);}
+  .service-full{background:#fff;display:grid;grid-template-columns:1fr 1.2fr;overflow:hidden;cursor:pointer;transition:box-shadow 0.3s;}
+  .service-full:hover{box-shadow:0 12px 40px rgba(28,43,58,0.1);}
+  .service-full.reverse{grid-template-columns:1.2fr 1fr;}
+  .service-full-img{width:100%;height:340px;object-fit:cover;display:block;transition:transform 0.6s ease;}
+  .service-full:hover .service-full-img{transform:scale(1.04);}
+  .service-full-img-wrap{overflow:hidden;}
+  .service-full-body{padding:3rem;display:flex;flex-direction:column;justify-content:center;gap:1rem;}
+  .service-full.reverse .service-full-img-wrap{order:2;}
+  .service-full.reverse .service-full-body{order:1;}
+  .what-included{margin-top:0.5rem;}
+  .what-included-title{font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:rgba(28,43,58,0.4);margin-bottom:0.6rem;}
+  .included-list{display:flex;flex-direction:column;gap:0.3rem;}
+  .included-item{font-size:13px;font-weight:300;color:rgba(28,43,58,0.65);display:flex;align-items:center;gap:8px;}
+  .included-item::before{content:'–';color:#4a7fa5;font-weight:400;}
+  .service-full-footer{display:flex;justify-content:space-between;align-items:flex-end;padding-top:1.5rem;border-top:0.5px solid rgba(28,43,58,0.07);margin-top:0.5rem;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Summit <span>Auto Solutions</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="book.html">Book</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="nav-phone">(801) 348-4269</span>
+    <a href="book.html" class="btn-main">Book Now</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <p class="page-header-eyebrow">What we offer</p>
+  <h1 class="page-header-title">Our <em>Services</em></h1>
+  <p class="page-header-sub">Three packages designed to cover every need — from a quick exterior refresh to a full inside-out restoration.</p>
+</div>
+
+<section class="section" style="padding-top:3rem;">
+  <div class="services-full">
+
+    <div class="service-full">
+      <div class="service-full-img-wrap">
+        <img class="service-full-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85&auto=format&fit=crop" alt="interior detail"/>
+      </div>
+      <div class="service-full-body">
+        <div class="service-tag2">Interior</div>
+        <div class="service-name" style="font-size:32px;">Interior Detail</div>
+        <div class="service-desc">Revive the inside of your vehicle from top to bottom. Every surface cleaned, disinfected, conditioned, and protected.</div>
+        <div class="what-included">
+          <div class="what-included-title">What's included</div>
+          <div class="included-list">
+            <div class="included-item">Spotless vacuum throughout</div>
+            <div class="included-item">All panels disinfected, conditioned & protected</div>
+            <div class="included-item">Wet vacuum for fabric seats</div>
+            <div class="included-item">Leather conditioner for leather seats</div>
+            <div class="included-item">Streak-free window cleaning</div>
+            <div class="included-item">Free scent included</div>
+          </div>
+        </div>
+        <div class="service-full-footer">
+          <div><div class="service-price">$100</div><div class="service-dur">1 hr 40 min</div></div>
+          <a href="book.html" class="btn-cta">Book This Service</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-full reverse">
+      <div class="service-full-img-wrap">
+        <img class="service-full-img" src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&q=85&auto=format&fit=crop" alt="interior exterior"/>
+      </div>
+      <div class="service-full-body">
+        <div class="service-tag2" style="display:flex;align-items:center;gap:8px;">Full Detail <span style="background:rgba(74,127,165,0.12);color:#4a7fa5;font-size:10px;padding:2px 10px;border-radius:20px;">Best Value</span></div>
+        <div class="service-name" style="font-size:32px;">Interior + Exterior</div>
+        <div class="service-desc">Our best bang for your buck. Everything inside and out — the complete restoration your car deserves.</div>
+        <div class="what-included">
+          <div class="what-included-title">What's included</div>
+          <div class="included-list">
+            <div class="included-item">Full interior detail (all items above)</div>
+            <div class="included-item">Exterior fender liner cleaning</div>
+            <div class="included-item">Wheels and tires cleaned and shined</div>
+            <div class="included-item">Gentle foam hand wash</div>
+            <div class="included-item">Bug removal</div>
+            <div class="included-item">Streak-free window cleaning</div>
+          </div>
+        </div>
+        <div class="service-full-footer">
+          <div><div class="service-price">$150</div><div class="service-dur">2 hrs</div></div>
+          <a href="book.html" class="btn-cta">Book This Service</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-full">
+      <div class="service-full-img-wrap">
+        <img class="service-full-img" src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=800&q=85&auto=format&fit=crop" alt="exterior wash wax"/>
+      </div>
+      <div class="service-full-body">
+        <div class="service-tag2">Exterior</div>
+        <div class="service-name" style="font-size:32px;">Exterior Wash & Wax</div>
+        <div class="service-desc">Revive your car's shine and protect your paint with our full exterior detailing service.</div>
+        <div class="what-included">
+          <div class="what-included-title">What's included</div>
+          <div class="included-list">
+            <div class="included-item">Wheel and tire cleaning</div>
+            <div class="included-item">Fender liner cleaning</div>
+            <div class="included-item">Gentle hand wash and dry</div>
+            <div class="included-item">Protective wax or sealant finish</div>
+            <div class="included-item">Free tire shine included</div>
+          </div>
+        </div>
+        <div class="service-full-footer">
+          <div><div class="service-price">$60</div><div class="service-dur">45 min</div></div>
+          <a href="book.html" class="btn-cta">Book This Service</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="bottom">
+  <div class="hours-panel">
+    <p class="hours-tag">We're open</p>
+    <h2 class="hours-title">Hours</h2>
+    <div class="hour-row open"><span>Monday</span><span>9 AM – 5 PM</span></div>
+    <div class="hour-row open"><span>Tuesday</span><span>9 AM – 5 PM</span></div>
+    <div class="hour-row open"><span>Wednesday</span><span>9 AM – 5 PM</span></div>
+    <div class="hour-row open"><span>Thursday</span><span>9 AM – 5 PM</span></div>
+    <div class="hour-row open"><span>Friday</span><span>9 AM – 5 PM</span></div>
+    <div class="hour-row"><span>Saturday</span><span>Closed</span></div>
+    <div class="hour-row"><span>Sunday</span><span>Closed</span></div>
+    <div class="open-badge">Open Now</div>
+  </div>
+  <div class="cta-panel">
+    <h2 class="cta-title">Not sure<br><span>which one?</span></h2>
+    <p class="cta-body">Give us a call and we'll point you to the right service for your car and budget.</p>
+    <div class="contact-list">
+      <div class="contact-item"><strong>Phone</strong> — (801) 348-4269</div>
+      <div class="contact-item"><strong>Hours</strong> — Mon–Fri, 9 AM–5 PM</div>
+    </div>
+    <a href="book.html" class="btn-cta">Book Online →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Summit Auto Solutions</div>
+  <span>(801) 348-4269 · Mon–Fri 9–5 · Utah</span>
+</footer>
+
+</body>
+</html>
