@@ -7,56 +7,80 @@
 <link rel="stylesheet" href="style.css"/>
 <style>
   .book-wrapper{max-width:960px;margin:0 auto;padding:4rem 2.5rem;}
-  .steps{display:flex;gap:0;margin-bottom:3rem;border:0.5px solid var(--border);border-radius:4px;overflow:hidden;}
-  .step{flex:1;padding:1rem 1.5rem;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);background:#fff;border-right:0.5px solid var(--border);cursor:default;transition:all 0.2s;}
+  .steps{display:flex;margin-bottom:3rem;border:0.5px solid var(--border);border-radius:12px;overflow:hidden;}
+  .step{flex:1;padding:1rem 1.5rem;font-size:12px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink3);background:#fff;border-right:0.5px solid var(--border);cursor:default;transition:all 0.2s;}
   .step:last-child{border-right:none;}
   .step.active{background:var(--dark);color:var(--snow);}
   .step.done{background:rgba(74,127,165,0.08);color:var(--accent);}
-  .step-num{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;display:block;margin-bottom:2px;}
+  .step-num{font-size:22px;font-weight:700;letter-spacing:-0.02em;display:block;margin-bottom:2px;}
+
   .panel{display:none;}
   .panel.active{display:block;}
+
+  .panel-title{font-size:30px;font-weight:700;letter-spacing:-0.03em;color:var(--ink);margin-bottom:1.75rem;}
+
+  /* STAFF */
   .staff-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:520px;}
-  .staff-card{background:#fff;border:0.5px solid var(--border);border-radius:6px;padding:2rem;display:flex;flex-direction:column;align-items:center;gap:0.75rem;cursor:pointer;transition:box-shadow 0.3s,transform 0.2s,border-color 0.2s;text-align:center;}
+  .staff-card{background:#fff;border:0.5px solid var(--border);border-radius:16px;padding:2rem;display:flex;flex-direction:column;align-items:center;gap:0.75rem;cursor:pointer;transition:box-shadow 0.3s,transform 0.2s,border-color 0.2s;text-align:center;}
   .staff-card:hover{box-shadow:0 8px 28px rgba(28,43,58,0.1);transform:translateY(-2px);border-color:var(--accent);}
   .staff-card.selected{border-color:var(--accent);border-width:2px;background:rgba(74,127,165,0.04);}
-  .staff-avatar{width:72px;height:72px;border-radius:50%;background:rgba(74,127,165,0.1);border:2px solid rgba(74,127,165,0.25);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--accent);}
-  .staff-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:var(--ink);}
-  .staff-role{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);}
+  .staff-avatar{width:72px;height:72px;border-radius:50%;background:rgba(74,127,165,0.1);border:2px solid rgba(74,127,165,0.25);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:var(--accent);}
+  .staff-name{font-size:22px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);}
+  .staff-role{font-size:12px;font-weight:400;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink3);}
+
+  /* SERVICES */
   .service-options{display:flex;flex-direction:column;gap:12px;max-width:580px;}
-  .service-option{background:#fff;border:0.5px solid var(--border);border-radius:6px;padding:1.5rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:border-color 0.2s,box-shadow 0.2s;}
+  .service-option{background:#fff;border:0.5px solid var(--border);border-radius:14px;padding:1.5rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:border-color 0.2s,box-shadow 0.2s;}
   .service-option:hover{border-color:var(--accent);box-shadow:0 4px 16px rgba(28,43,58,0.07);}
   .service-option.selected{border-color:var(--accent);border-width:2px;background:rgba(74,127,165,0.04);}
-  .service-option-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:var(--ink);}
-  .service-option-dur{font-size:12px;color:var(--ink3);margin-top:2px;}
-  .service-option-price{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--ink);}
-  .datetime-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:580px;}
+  .service-option-name{font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);}
+  .service-option-dur{font-size:13px;color:var(--ink3);margin-top:2px;}
+  .service-option-price{font-size:26px;font-weight:700;letter-spacing:-0.03em;color:var(--ink);}
+
+  /* DATETIME */
+  .datetime-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:600px;}
+  .dt-label{font-size:12px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink3);margin-bottom:0.6rem;}
+  input[type="date"]{
+    background:#fff;border:0.5px solid var(--border);border-radius:10px;
+    padding:10px 14px;font-family:var(--font);font-size:15px;
+    color:var(--ink);outline:none;transition:border-color 0.2s;width:100%;cursor:pointer;
+  }
+  input[type="date"]:focus{border-color:var(--accent);}
   .time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:0.5rem;}
-  .time-slot{background:#fff;border:0.5px solid var(--border);border-radius:2px;padding:8px 10px;font-size:13px;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;color:var(--ink);}
-  .time-slot:hover{border-color:var(--accent);}
+  .time-slot{background:#fff;border:0.5px solid var(--border);border-radius:8px;padding:9px 10px;font-size:13px;font-weight:500;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;color:var(--ink);}
+  .time-slot:hover:not(.booked){border-color:var(--accent);}
   .time-slot.selected{background:var(--dark);color:var(--snow);border-color:var(--dark);}
+  .time-slot.booked{background:rgba(28,43,58,0.04);color:var(--ink3);cursor:not-allowed;border-color:transparent;text-decoration:line-through;}
+  .slots-loading{font-size:13px;color:var(--ink3);grid-column:span 3;padding:0.5rem 0;}
+
+  /* FORM */
   .booking-form{max-width:580px;}
   .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-  .form-group{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.25rem;}
-  .form-group label{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);}
-  .form-group input{background:#fff;border:0.5px solid var(--border);border-radius:2px;padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);outline:none;transition:border-color 0.2s;width:100%;}
-  .form-group input:focus{border-color:var(--accent);}
-  .summary-box{background:var(--dark);border-radius:6px;padding:2rem;margin-bottom:2rem;max-width:580px;}
-  .summary-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--snow);margin-bottom:1.25rem;}
-  .summary-row{display:flex;justify-content:space-between;font-size:14px;padding:6px 0;border-bottom:0.5px solid rgba(240,242,245,0.06);}
+
+  /* SUMMARY */
+  .summary-box{background:var(--dark);border-radius:14px;padding:2rem;margin-bottom:2rem;max-width:580px;}
+  .summary-title{font-size:20px;font-weight:600;letter-spacing:-0.02em;color:var(--snow);margin-bottom:1.25rem;}
+  .summary-row{display:flex;justify-content:space-between;font-size:15px;padding:7px 0;border-bottom:0.5px solid rgba(240,242,245,0.06);}
   .summary-row:last-child{border-bottom:none;}
   .summary-label{color:rgba(240,242,245,0.4);}
-  .summary-value{color:rgba(240,242,245,0.85);}
+  .summary-value{color:rgba(240,242,245,0.9);font-weight:500;}
+
+  /* NAV */
   .panel-nav{display:flex;gap:1rem;margin-top:2rem;align-items:center;}
-  .btn-back{background:transparent;color:var(--ink2);border:0.5px solid var(--border);padding:10px 22px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:border-color 0.2s;}
+  .btn-back{background:transparent;color:var(--ink2);border:0.5px solid var(--border);padding:10px 20px;font-family:var(--font);font-size:13px;font-weight:500;border-radius:8px;cursor:pointer;transition:border-color 0.2s;}
   .btn-back:hover{border-color:var(--accent);color:var(--accent);}
-  .btn-next{background:var(--dark);color:var(--snow);border:none;padding:11px 28px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:background 0.2s;}
-  .btn-next:hover{background:var(--accent);}
-  .btn-next:disabled{opacity:0.4;cursor:not-allowed;}
+  .btn-next{background:var(--dark);color:var(--snow);border:none;padding:11px 26px;font-family:var(--font);font-size:13px;font-weight:500;border-radius:10px;cursor:pointer;transition:background 0.2s;}
+  .btn-next:hover:not(:disabled){background:var(--accent);}
+  .btn-next:disabled{opacity:0.35;cursor:not-allowed;}
+
+  /* SUCCESS */
   .success-panel{text-align:center;padding:4rem 2rem;max-width:520px;margin:0 auto;}
-  .success-icon{width:64px;height:64px;border-radius:50%;background:rgba(74,127,165,0.1);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:28px;color:var(--accent);}
-  .success-title{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:400;color:var(--ink);margin-bottom:0.75rem;}
-  .success-sub{font-size:15px;font-weight:300;line-height:1.7;color:var(--ink2);}
-  .error-msg{background:rgba(200,50,50,0.08);border:0.5px solid rgba(200,50,50,0.25);border-radius:4px;padding:0.75rem 1rem;font-size:13px;color:#c03232;margin-bottom:1rem;display:none;}
+  .success-icon{width:72px;height:72px;border-radius:50%;background:rgba(74,127,165,0.1);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:30px;color:var(--accent);}
+  .success-title{font-size:38px;font-weight:700;letter-spacing:-0.03em;color:var(--ink);margin-bottom:0.75rem;}
+  .success-sub{font-size:16px;font-weight:300;line-height:1.7;color:var(--ink2);}
+
+  .error-msg{background:rgba(200,50,50,0.08);border:0.5px solid rgba(200,50,50,0.2);border-radius:10px;padding:0.75rem 1rem;font-size:13px;color:#c03232;margin-bottom:1rem;display:none;}
+  .date-err{font-size:13px;color:#c03232;display:none;margin-top:0.4rem;}
 </style>
 </head>
 <body>
@@ -89,10 +113,10 @@
     <div class="step" id="step4"><span class="step-num">04</span>Your Info</div>
   </div>
 
-  <!-- STEP 1: DETAILER -->
+  <!-- STEP 1 -->
   <div class="panel active" id="panel1">
     <p class="section-tag">Step 1</p>
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;color:var(--ink);margin-bottom:1.75rem;">Who would you like to book with?</h2>
+    <h2 class="panel-title">Who would you like to book with?</h2>
     <div class="staff-grid">
       <div class="staff-card" onclick="selectDetailer('Hudson', this)">
         <div class="staff-avatar">H</div>
@@ -110,10 +134,10 @@
     </div>
   </div>
 
-  <!-- STEP 2: SERVICE -->
+  <!-- STEP 2 -->
   <div class="panel" id="panel2">
     <p class="section-tag">Step 2</p>
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;color:var(--ink);margin-bottom:1.75rem;">Which service do you need?</h2>
+    <h2 class="panel-title">Which service do you need?</h2>
     <div class="service-options">
       <div class="service-option" onclick="selectService('Interior Detail','$100','1 hr 40 min',this)">
         <div><div class="service-option-name">Interior Detail</div><div class="service-option-dur">1 hr 40 min</div></div>
@@ -122,7 +146,7 @@
       <div class="service-option" onclick="selectService('Interior + Exterior','$150','2 hrs',this)">
         <div>
           <div class="service-option-name">Interior + Exterior</div>
-          <div class="service-option-dur">2 hrs &nbsp;·&nbsp;<span style="color:var(--accent);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;">Best Value</span></div>
+          <div class="service-option-dur">2 hrs &nbsp;·&nbsp;<span style="color:var(--accent);font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;">Best Value</span></div>
         </div>
         <div class="service-option-price">$150</div>
       </div>
@@ -137,31 +161,20 @@
     </div>
   </div>
 
-  <!-- STEP 3: DATE & TIME -->
+  <!-- STEP 3 -->
   <div class="panel" id="panel3">
     <p class="section-tag">Step 3</p>
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;color:var(--ink);margin-bottom:1.75rem;">Pick a date and time</h2>
+    <h2 class="panel-title">Pick a date and time</h2>
     <div class="datetime-grid">
       <div>
-        <div class="form-group">
-          <label>Date (Mon–Fri only)</label>
-          <input type="date" id="booking-date" onchange="handleDateChange(this)"/>
-        </div>
-        <p id="date-error" style="font-size:13px;color:#c03232;display:none;">Weekdays only (Mon–Fri).</p>
+        <div class="dt-label">Date (Mon–Fri only)</div>
+        <input type="date" id="booking-date" onchange="handleDateChange(this)"/>
+        <p class="date-err" id="date-error">Weekdays only (Mon–Fri).</p>
       </div>
       <div>
-        <div class="form-group">
-          <label>Available Times</label>
-          <div class="time-slots">
-            <div class="time-slot" onclick="selectTime('9:00 AM',this)">9:00 AM</div>
-            <div class="time-slot" onclick="selectTime('10:00 AM',this)">10:00 AM</div>
-            <div class="time-slot" onclick="selectTime('11:00 AM',this)">11:00 AM</div>
-            <div class="time-slot" onclick="selectTime('12:00 PM',this)">12:00 PM</div>
-            <div class="time-slot" onclick="selectTime('1:00 PM',this)">1:00 PM</div>
-            <div class="time-slot" onclick="selectTime('2:00 PM',this)">2:00 PM</div>
-            <div class="time-slot" onclick="selectTime('3:00 PM',this)">3:00 PM</div>
-            <div class="time-slot" onclick="selectTime('4:00 PM',this)">4:00 PM</div>
-          </div>
+        <div class="dt-label">Available Times</div>
+        <div class="time-slots" id="time-slots">
+          <div class="slots-loading">Select a date first</div>
         </div>
       </div>
     </div>
@@ -171,10 +184,10 @@
     </div>
   </div>
 
-  <!-- STEP 4: INFO -->
+  <!-- STEP 4 -->
   <div class="panel" id="panel4">
     <p class="section-tag">Step 4</p>
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;color:var(--ink);margin-bottom:1.75rem;">Your details</h2>
+    <h2 class="panel-title">Your details</h2>
     <div class="summary-box" id="booking-summary"></div>
     <div class="error-msg" id="error-msg"></div>
     <div class="booking-form">
@@ -196,7 +209,7 @@
     <div class="success-panel">
       <div class="success-icon">✓</div>
       <h2 class="success-title">You're booked.</h2>
-      <p class="success-sub">A confirmation has been sent to your email. We'll see you soon — if you need to reschedule call us at <strong>(801) 348-4269</strong>.</p>
+      <p class="success-sub">A confirmation has been sent to your email. If you need to reschedule call us at <strong>(801) 348-4269</strong>.</p>
       <div style="margin-top:2.5rem;display:flex;gap:1rem;justify-content:center;">
         <a href="index.html" class="btn-outline">Back to Home</a>
         <a href="services.html" class="btn-cta">View Services</a>
@@ -214,7 +227,7 @@
 <!-- Firebase -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+  import { getFirestore, collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
   const app = initializeApp({
     apiKey: "AIzaSyAFN69H0F6zPqjOKZ-evKUZWSByXvvQQuQ",
@@ -229,6 +242,9 @@
   window._db = db;
   window._addDoc = addDoc;
   window._collection = collection;
+  window._query = query;
+  window._where = where;
+  window._getDocs = getDocs;
 </script>
 
 <!-- EmailJS -->
@@ -236,6 +252,7 @@
 <script>
   emailjs.init("wFyaJ2VQNG2SgkbJW");
 
+  const ALL_SLOTS = ['9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM'];
   const booking = { detailer:'', service:'', price:'', duration:'', date:'', time:'' };
 
   function selectDetailer(name, el) {
@@ -243,6 +260,11 @@
     document.querySelectorAll('.staff-card').forEach(c => c.classList.remove('selected'));
     el.classList.add('selected');
     document.getElementById('next1').disabled = false;
+    // reset date/time if switching detailer
+    booking.date = '';
+    booking.time = '';
+    document.getElementById('booking-date').value = '';
+    renderSlots([]);
   }
 
   function selectService(name, price, duration, el) {
@@ -254,30 +276,65 @@
     document.getElementById('next2').disabled = false;
   }
 
-  function handleDateChange(input) {
+  async function handleDateChange(input) {
     const d = new Date(input.value + 'T00:00:00');
     const day = d.getDay();
     const err = document.getElementById('date-error');
+
     if (day === 0 || day === 6) {
       err.style.display = 'block';
       booking.date = '';
+      booking.time = '';
       input.value = '';
-    } else {
-      err.style.display = 'none';
-      booking.date = input.value;
+      renderSlots([]);
+      return;
     }
-    checkDateTime();
+
+    err.style.display = 'none';
+    booking.date = input.value;
+    booking.time = '';
+    document.getElementById('next3').disabled = true;
+
+    // fetch booked slots for this detailer + date
+    const slotsEl = document.getElementById('time-slots');
+    slotsEl.innerHTML = '<div class="slots-loading">Checking availability...</div>';
+
+    try {
+      const q = window._query(
+        window._collection(window._db, 'bookings'),
+        window._where('detailer', '==', booking.detailer),
+        window._where('date', '==', formatDate(input.value))
+      );
+      const snap = await window._getDocs(q);
+      const booked = snap.docs.map(d => d.data().time);
+      renderSlots(booked);
+    } catch(e) {
+      console.error(e);
+      renderSlots([]);
+    }
+  }
+
+  function formatDate(val) {
+    return new Date(val + 'T00:00:00').toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  }
+
+  function renderSlots(bookedTimes) {
+    const el = document.getElementById('time-slots');
+    if (!booking.date) {
+      el.innerHTML = '<div class="slots-loading">Select a date first</div>';
+      return;
+    }
+    el.innerHTML = ALL_SLOTS.map(t => {
+      const isBooked = bookedTimes.includes(t);
+      return `<div class="time-slot${isBooked ? ' booked' : ''}" ${isBooked ? '' : `onclick="selectTime('${t}', this)"`}>${t}</div>`;
+    }).join('');
   }
 
   function selectTime(time, el) {
     booking.time = time;
-    document.querySelectorAll('.time-slot').forEach(t => t.classList.remove('selected'));
+    document.querySelectorAll('.time-slot:not(.booked)').forEach(t => t.classList.remove('selected'));
     el.classList.add('selected');
-    checkDateTime();
-  }
-
-  function checkDateTime() {
-    document.getElementById('next3').disabled = !(booking.date && booking.time);
+    document.getElementById('next3').disabled = false;
   }
 
   function goTo(step) {
@@ -293,14 +350,13 @@
   }
 
   function renderSummary() {
-    const dateFormatted = new Date(booking.date + 'T00:00:00').toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
     document.getElementById('booking-summary').innerHTML = `
       <div class="summary-title">Booking Summary</div>
       <div class="summary-row"><span class="summary-label">Detailer</span><span class="summary-value">${booking.detailer}</span></div>
       <div class="summary-row"><span class="summary-label">Service</span><span class="summary-value">${booking.service}</span></div>
       <div class="summary-row"><span class="summary-label">Price</span><span class="summary-value">${booking.price}</span></div>
       <div class="summary-row"><span class="summary-label">Duration</span><span class="summary-value">${booking.duration}</span></div>
-      <div class="summary-row"><span class="summary-label">Date</span><span class="summary-value">${dateFormatted}</span></div>
+      <div class="summary-row"><span class="summary-label">Date</span><span class="summary-value">${formatDate(booking.date)}</span></div>
       <div class="summary-row"><span class="summary-label">Time</span><span class="summary-value">${booking.time}</span></div>
     `;
   }
@@ -323,7 +379,7 @@
     btn.textContent = 'Submitting...';
     errEl.style.display = 'none';
 
-    const dateFormatted = new Date(booking.date + 'T00:00:00').toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    const dateFormatted = formatDate(booking.date);
     const params = {
       customer_name: fname + ' ' + lname,
       to_email: email,
@@ -336,7 +392,10 @@
     };
 
     try {
-      await window._addDoc(window._collection(window._db, 'bookings'), { ...params, createdAt: new Date().toISOString() });
+      await window._addDoc(window._collection(window._db, 'bookings'), {
+        ...params,
+        createdAt: new Date().toISOString()
+      });
       await emailjs.send('service_mxno1sf', 'template_7xg78nt', params);
       await emailjs.send('service_mxno1sf', 'template_g0a10zq', params);
 
