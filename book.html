@@ -6,7 +6,7 @@
 <title>Book — Summit Auto Solutions</title>
 <link rel="stylesheet" href="style.css"/>
 <style>
-  .book-wrapper{max-width:960px;margin:0 auto;padding:4rem 2.5rem;}
+  .book-wrapper{max-width:980px;margin:0 auto;padding:4rem 2.5rem;}
   .steps{display:flex;margin-bottom:3rem;border:0.5px solid var(--border);border-radius:12px;overflow:hidden;}
   .step{flex:1;padding:1rem 1.5rem;font-size:12px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink3);background:#fff;border-right:0.5px solid var(--border);cursor:default;transition:all 0.2s;}
   .step:last-child{border-right:none;}
@@ -14,7 +14,22 @@
   .step.done{background:rgba(74,127,165,0.08);color:var(--accent);}
   .step-num{font-size:22px;font-weight:700;letter-spacing:-0.02em;display:block;margin-bottom:2px;}
   .panel{display:none;} .panel.active{display:block;}
-  .panel-title{font-size:30px;font-weight:700;letter-spacing:-0.03em;color:var(--ink);margin-bottom:1.75rem;}
+  .panel-title{font-size:30px;font-weight:700;letter-spacing:-0.03em;color:var(--ink);margin-bottom:0.5rem;}
+  .panel-sub{font-size:15px;font-weight:300;color:var(--ink2);margin-bottom:2rem;line-height:1.6;}
+
+  /* VEHICLE GRID */
+  .vehicle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:720px;}
+  .vehicle-card{background:#fff;border:0.5px solid var(--border);border-radius:14px;padding:1.5rem;cursor:pointer;transition:border-color 0.2s,box-shadow 0.2s,transform 0.15s;display:flex;flex-direction:column;gap:0.5rem;}
+  .vehicle-card:hover{border-color:var(--accent);box-shadow:0 6px 24px rgba(28,43,58,0.09);transform:translateY(-1px);}
+  .vehicle-card.selected{border-color:var(--accent);border-width:2px;background:rgba(74,127,165,0.04);}
+  .vehicle-card.tier2{border-color:rgba(74,127,165,0.2);}
+  .vehicle-card.tier3{border-color:rgba(28,43,58,0.15);background:rgba(28,43,58,0.02);}
+  .vehicle-icon{font-size:28px;margin-bottom:0.25rem;}
+  .vehicle-name{font-size:16px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);}
+  .vehicle-price{font-size:13px;color:var(--ink3);}
+  .vehicle-badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:2px 8px;border-radius:20px;width:fit-content;}
+  .badge-jordan{background:rgba(74,127,165,0.1);color:var(--accent);}
+  .badge-quote{background:rgba(28,43,58,0.07);color:var(--ink2);}
 
   /* STAFF */
   .staff-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:520px;}
@@ -32,9 +47,10 @@
   .service-option.selected{border-color:var(--accent);border-width:2px;background:rgba(74,127,165,0.04);}
   .service-option-name{font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);}
   .service-option-dur{font-size:13px;color:var(--ink3);margin-top:2px;}
-  .service-option-price{font-size:26px;font-weight:700;letter-spacing:-0.03em;color:var(--ink);}
+  .service-option-price{font-size:26px;font-weight:700;letter-spacing:-0.03em;color:var(--ink);text-align:right;}
+  .service-option-note{font-size:11px;color:var(--accent);font-weight:500;margin-top:2px;}
 
-  /* CUSTOM CALENDAR */
+  /* CALENDAR */
   .datetime-wrap{display:grid;grid-template-columns:340px 1fr;gap:2.5rem;align-items:start;max-width:760px;}
   .cal{background:#fff;border:0.5px solid var(--border);border-radius:16px;overflow:hidden;user-select:none;}
   .cal-header{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.25rem;border-bottom:0.5px solid var(--border);}
@@ -57,8 +73,6 @@
   .cal-legend{display:flex;gap:1rem;padding:0 0.75rem 0.75rem;flex-wrap:wrap;}
   .cal-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink3);}
   .cal-legend-dot{width:10px;height:10px;border-radius:3px;}
-
-  /* TIMES */
   .dt-label{font-size:12px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink3);margin-bottom:0.75rem;}
   .selected-date-label{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:1rem;min-height:22px;letter-spacing:-0.01em;}
   .time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
@@ -72,6 +86,10 @@
   /* FORM */
   .booking-form{max-width:580px;}
   .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .price-estimate{background:rgba(74,127,165,0.07);border:0.5px solid rgba(74,127,165,0.2);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.5rem;max-width:580px;}
+  .price-estimate-label{font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);margin-bottom:0.25rem;}
+  .price-estimate-val{font-size:20px;font-weight:700;letter-spacing:-0.02em;color:var(--ink);}
+  .price-estimate-note{font-size:12px;color:var(--ink3);margin-top:0.2rem;}
 
   /* SUMMARY */
   .summary-box{background:var(--dark);border-radius:14px;padding:2rem;margin-bottom:2rem;max-width:580px;}
@@ -105,6 +123,7 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="services.html">Services</a></li>
     <li><a href="book.html" class="active">Book</a></li>
+    <li><a href="quote.html">Get a Quote</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="nav-right">
@@ -119,18 +138,66 @@
 </div>
 
 <div class="book-wrapper">
-  <div class="steps">
-    <div class="step active" id="step1"><span class="step-num">01</span>Detailer</div>
-    <div class="step" id="step2"><span class="step-num">02</span>Service</div>
-    <div class="step" id="step3"><span class="step-num">03</span>Date & Time</div>
-    <div class="step" id="step4"><span class="step-num">04</span>Your Info</div>
+  <div class="steps" id="steps-bar">
+    <div class="step active" id="step1"><span class="step-num">01</span>Vehicle</div>
+    <div class="step" id="step2"><span class="step-num">02</span>Detailer</div>
+    <div class="step" id="step3"><span class="step-num">03</span>Service</div>
+    <div class="step" id="step4"><span class="step-num">04</span>Date & Time</div>
+    <div class="step" id="step5"><span class="step-num">05</span>Your Info</div>
   </div>
 
-  <!-- STEP 1 -->
+  <!-- STEP 1: VEHICLE -->
   <div class="panel active" id="panel1">
     <p class="section-tag">Step 1</p>
-    <h2 class="panel-title">Who would you like to book with?</h2>
-    <div class="staff-grid">
+    <h2 class="panel-title">What are we detailing?</h2>
+    <p class="panel-sub">Select your vehicle type and we'll route you to the right service.</p>
+    <div class="vehicle-grid">
+      <div class="vehicle-card" onclick="selectVehicle('Motorcycle','$60–$80','tier1',this)">
+        <div class="vehicle-icon">🏍️</div>
+        <div class="vehicle-name">Motorcycle</div>
+        <div class="vehicle-price">From $60</div>
+      </div>
+      <div class="vehicle-card" onclick="selectVehicle('Sedan / Coupe','$120','tier1',this)">
+        <div class="vehicle-icon">🚗</div>
+        <div class="vehicle-name">Sedan / Coupe</div>
+        <div class="vehicle-price">$120</div>
+      </div>
+      <div class="vehicle-card tier2" onclick="selectVehicle('SUV','$160','tier2',this)">
+        <div class="vehicle-icon">🚙</div>
+        <div class="vehicle-name">SUV</div>
+        <div class="vehicle-price">$160</div>
+        <span class="vehicle-badge badge-jordan">Jordan handles</span>
+      </div>
+      <div class="vehicle-card tier2" onclick="selectVehicle('Van / Minivan','$180','tier2',this)">
+        <div class="vehicle-icon">🚐</div>
+        <div class="vehicle-name">Van / Minivan</div>
+        <div class="vehicle-price">$180</div>
+        <span class="vehicle-badge badge-jordan">Jordan handles</span>
+      </div>
+      <div class="vehicle-card tier2" onclick="selectVehicle('Large Truck','$200','tier2',this)">
+        <div class="vehicle-icon">🛻</div>
+        <div class="vehicle-name">Large Truck</div>
+        <div class="vehicle-price">$200</div>
+        <span class="vehicle-badge badge-jordan">Jordan handles</span>
+      </div>
+      <div class="vehicle-card tier3" onclick="goToQuote()">
+        <div class="vehicle-icon">✨</div>
+        <div class="vehicle-name">Paint Correction / Ceramic / Fleet</div>
+        <div class="vehicle-price">Custom quote</div>
+        <span class="vehicle-badge badge-quote">Request a quote →</span>
+      </div>
+    </div>
+    <div class="panel-nav">
+      <button class="btn-next" id="next1" disabled onclick="goTo(2)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: DETAILER (tier1 only, tier2 skips) -->
+  <div class="panel" id="panel2">
+    <p class="section-tag">Step 2</p>
+    <h2 class="panel-title" id="detailer-title">Who would you like to book with?</h2>
+    <p class="panel-sub" id="detailer-sub"></p>
+    <div class="staff-grid" id="staff-grid">
       <div class="staff-card" onclick="selectDetailer('Hudson', this)">
         <div class="staff-avatar">H</div>
         <div class="staff-name">Hudson</div>
@@ -143,40 +210,26 @@
       </div>
     </div>
     <div class="panel-nav">
-      <button class="btn-next" id="next1" disabled onclick="goTo(2)">Continue →</button>
-    </div>
-  </div>
-
-  <!-- STEP 2 -->
-  <div class="panel" id="panel2">
-    <p class="section-tag">Step 2</p>
-    <h2 class="panel-title">Which service do you need?</h2>
-    <div class="service-options">
-      <div class="service-option" onclick="selectService('Interior Detail','$100','1 hr 40 min',this)">
-        <div><div class="service-option-name">Interior Detail</div><div class="service-option-dur">1 hr 40 min</div></div>
-        <div class="service-option-price">$100</div>
-      </div>
-      <div class="service-option" onclick="selectService('Interior + Exterior','$150','2 hrs',this)">
-        <div>
-          <div class="service-option-name">Interior + Exterior</div>
-          <div class="service-option-dur">2 hrs &nbsp;·&nbsp;<span style="color:var(--accent);font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;">Best Value</span></div>
-        </div>
-        <div class="service-option-price">$150</div>
-      </div>
-      <div class="service-option" onclick="selectService('Exterior Wash & Wax','$60','45 min',this)">
-        <div><div class="service-option-name">Exterior Wash & Wax</div><div class="service-option-dur">45 min</div></div>
-        <div class="service-option-price">$60</div>
-      </div>
-    </div>
-    <div class="panel-nav">
       <button class="btn-back" onclick="goTo(1)">← Back</button>
       <button class="btn-next" id="next2" disabled onclick="goTo(3)">Continue →</button>
     </div>
   </div>
 
-  <!-- STEP 3 -->
+  <!-- STEP 3: SERVICE -->
   <div class="panel" id="panel3">
     <p class="section-tag">Step 3</p>
+    <h2 class="panel-title">Which service do you need?</h2>
+    <p class="panel-sub" id="service-sub"></p>
+    <div class="service-options" id="service-options"></div>
+    <div class="panel-nav">
+      <button class="btn-back" onclick="goTo(2)">← Back</button>
+      <button class="btn-next" id="next3" disabled onclick="goTo(4)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: DATE & TIME -->
+  <div class="panel" id="panel4">
+    <p class="section-tag">Step 4</p>
     <h2 class="panel-title">Pick a date and time</h2>
     <div class="datetime-wrap">
       <div>
@@ -203,34 +256,33 @@
       <div>
         <div class="dt-label">Available Times</div>
         <div class="selected-date-label" id="selected-date-label">No date selected</div>
-        <div id="time-slots-wrap">
-          <div class="slots-placeholder">Select a date to see available times</div>
-        </div>
+        <div id="time-slots-wrap"><div class="slots-placeholder">Select a date to see available times</div></div>
         <div class="day-full-msg" id="day-full">This day is fully booked — choose another date.</div>
       </div>
     </div>
     <div class="panel-nav">
-      <button class="btn-back" onclick="goTo(2)">← Back</button>
-      <button class="btn-next" id="next3" disabled onclick="goTo(4)">Continue →</button>
+      <button class="btn-back" onclick="goTo(3)">← Back</button>
+      <button class="btn-next" id="next4" disabled onclick="goTo(5)">Continue →</button>
     </div>
   </div>
 
-  <!-- STEP 4 -->
-  <div class="panel" id="panel4">
-    <p class="section-tag">Step 4</p>
+  <!-- STEP 5: INFO -->
+  <div class="panel" id="panel5">
+    <p class="section-tag">Step 5</p>
     <h2 class="panel-title">Your details</h2>
     <div class="summary-box" id="booking-summary"></div>
+    <div id="price-estimate-wrap"></div>
     <div class="error-msg" id="error-msg"></div>
     <div class="booking-form">
       <div class="form-row">
-        <div class="form-group"><label>First Name</label><input type="text" id="fname" placeholder="John"/></div>
-        <div class="form-group"><label>Last Name</label><input type="text" id="lname" placeholder="Smith"/></div>
+        <div class="form-group"><label>First Name</label><input type="text" id="fname" placeholder="John" required/></div>
+        <div class="form-group"><label>Last Name</label><input type="text" id="lname" placeholder="Smith" required/></div>
       </div>
-      <div class="form-group"><label>Email</label><input type="email" id="email" placeholder="john@example.com"/></div>
-      <div class="form-group"><label>Phone (optional)</label><input type="tel" id="phone" placeholder="(801) 000-0000"/></div>
+      <div class="form-group"><label>Email</label><input type="email" id="email" placeholder="john@example.com" required/></div>
+      <div class="form-group"><label>Phone <span style="color:#c03232;">*</span></label><input type="tel" id="phone" placeholder="(801) 000-0000" required/></div>
     </div>
     <div class="panel-nav">
-      <button class="btn-back" onclick="goTo(3)">← Back</button>
+      <button class="btn-back" onclick="goTo(4)">← Back</button>
       <button class="btn-next" id="submit-btn" onclick="submitBooking()">Confirm Booking →</button>
     </div>
   </div>
@@ -240,7 +292,7 @@
     <div class="success-panel">
       <div class="success-icon">✓</div>
       <h2 class="success-title">You're booked.</h2>
-      <p class="success-sub">A confirmation has been sent to your email. If you need to reschedule call us at <strong>(801) 348-4269</strong>.</p>
+      <p class="success-sub" id="success-msg">A confirmation has been sent to your email. If you need to reschedule call us at <strong>(801) 348-4269</strong>.</p>
       <div style="margin-top:2.5rem;display:flex;gap:1rem;justify-content:center;">
         <a href="index.html" class="btn-outline">Back to Home</a>
         <a href="services.html" class="btn-cta">View Services</a>
@@ -267,12 +319,8 @@
     appId: "1:116967321496:web:ee29f2d685f816eccb05ed"
   });
   const db = getFirestore(app);
-  window._db = db;
-  window._addDoc = addDoc;
-  window._collection = collection;
-  window._query = query;
-  window._where = where;
-  window._getDocs = getDocs;
+  window._db = db; window._addDoc = addDoc; window._collection = collection;
+  window._query = query; window._where = where; window._getDocs = getDocs;
 </script>
 
 <!-- EmailJS -->
@@ -284,15 +332,75 @@
   const SATURDAY_SLOTS = ['6:00 AM','7:00 AM','8:00 AM','9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM'];
   const MAX_PER_DAY = 4;
   const MAX_DATE = new Date('2026-05-22T23:59:59');
-
-  const booking = { detailer:'', service:'', price:'', duration:'', date:'', time:'' };
-
-  // calendar state
   const todayD = new Date(); todayD.setHours(0,0,0,0);
-  let calYear = todayD.getFullYear();
-  let calMonth = todayD.getMonth();
   const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
+  const booking = { vehicle:'', vehicleTier:'', price:'', detailer:'', service:'', serviceName:'', date:'', time:'' };
+  let calYear = todayD.getFullYear(), calMonth = todayD.getMonth();
+
+  // VEHICLE
+  function selectVehicle(name, price, tier, el) {
+    booking.vehicle = name; booking.vehicleTier = tier; booking.price = price;
+    document.querySelectorAll('.vehicle-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('next1').disabled = false;
+  }
+
+  function goToQuote() { window.location.href = 'quote.html'; }
+
+  // DETAILER
+  function selectDetailer(name, el) {
+    booking.detailer = name;
+    document.querySelectorAll('.staff-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('next2').disabled = false;
+  }
+
+  // SERVICE — dynamic based on vehicle
+  function buildServices() {
+    const wrap = document.getElementById('service-options');
+    const sub = document.getElementById('service-sub');
+    const v = booking.vehicle;
+    let services = [];
+
+    if (booking.vehicleTier === 'tier1') {
+      sub.textContent = '';
+      services = [
+        { name: 'Interior Detail', price: booking.price, dur: '1 hr 40 min', note: '' },
+        { name: 'Interior + Exterior', price: booking.price === '$120' ? '$120' : booking.price, dur: '2 hrs', note: 'Best value' },
+        { name: 'Exterior Wash & Wax', price: v === 'Motorcycle' ? '$60' : '$80', dur: '45 min', note: '' },
+      ];
+    } else {
+      sub.textContent = 'Jordan will confirm the exact price before your appointment.';
+      services = [
+        { name: 'Interior Detail', price: booking.price, dur: 'Est. 2–3 hrs', note: 'Estimate — Jordan confirms' },
+        { name: 'Interior + Exterior', price: booking.price, dur: 'Est. 3–4 hrs', note: 'Best value · Estimate' },
+        { name: 'Exterior Wash & Wax', price: booking.price, dur: 'Est. 1 hr', note: 'Estimate — Jordan confirms' },
+      ];
+    }
+
+    wrap.innerHTML = services.map((s, i) => `
+      <div class="service-option" onclick="selectService('${s.name}','${s.price}','${s.dur}',this)">
+        <div>
+          <div class="service-option-name">${s.name}</div>
+          <div class="service-option-dur">${s.dur}${s.note ? ` &nbsp;·&nbsp;<span style="color:var(--accent);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;">${s.note}</span>` : ''}</div>
+        </div>
+        <div>
+          <div class="service-option-price">${s.price}</div>
+          ${booking.vehicleTier === 'tier2' ? '<div class="service-option-note">Estimate</div>' : ''}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function selectService(name, price, dur, el) {
+    booking.serviceName = name; booking.price = price;
+    document.querySelectorAll('.service-option').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('next3').disabled = false;
+  }
+
+  // CALENDAR
   function renderCal() {
     document.getElementById('cal-month-label').textContent = MONTHS[calMonth] + ' ' + calYear;
     const firstDay = new Date(calYear, calMonth, 1).getDay();
@@ -305,22 +413,20 @@
       const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
       const isToday = date.getTime() === todayD.getTime();
       const isPast = date < todayD;
-      const isSunday = dow === 0;
+      const isSun = dow === 0;
       const isBeyond = date > MAX_DATE;
       const isSat = dow === 6;
-      const isSelected = booking.date === dateStr;
-
+      const isSel = booking.date === dateStr;
       let cls = 'cal-day';
-      if (isSelected) cls += ' cal-selected';
+      if (isSel) cls += ' cal-selected';
       else if (isPast) cls += ' cal-past';
-      else if (isSunday) cls += ' cal-sunday';
+      else if (isSun) cls += ' cal-sunday';
       else if (isBeyond) cls += ' cal-beyond';
       else if (isSat) cls += ' cal-sat cal-available';
       else cls += ' cal-available';
       if (isToday) cls += ' cal-today';
-
-      const clickable = !isPast && !isSunday && !isBeyond && !isSelected;
-      html += `<div class="${cls}" ${clickable ? `onclick="pickDate('${dateStr}', ${dow})"` : ''}>${d}</div>`;
+      const clickable = !isPast && !isSun && !isBeyond;
+      html += `<div class="${cls}" ${clickable ? `onclick="pickDate('${dateStr}',${dow})"` : ''}>${d}</div>`;
     }
     document.getElementById('cal-days').innerHTML = html;
   }
@@ -333,52 +439,33 @@
   }
 
   async function pickDate(dateStr, dow) {
-    booking.date = dateStr;
-    booking.time = '';
-    document.getElementById('next3').disabled = true;
+    booking.date = dateStr; booking.time = '';
+    document.getElementById('next4').disabled = true;
     document.getElementById('day-full').style.display = 'none';
     renderCal();
-
     const d = new Date(dateStr + 'T00:00:00');
-    document.getElementById('selected-date-label').textContent = d.toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric'});
-
+    document.getElementById('selected-date-label').textContent = d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
     const wrap = document.getElementById('time-slots-wrap');
+    wrap.style.display = 'block'; wrap.style.gridTemplateColumns = '';
     wrap.innerHTML = '<div class="slots-placeholder">Checking availability...</div>';
-
     try {
-      const q = window._query(
-        window._collection(window._db, 'bookings'),
-        window._where('detailer', '==', booking.detailer),
-        window._where('date', '==', formatDate(dateStr))
-      );
+      const q = window._query(window._collection(window._db,'bookings'), window._where('detailer','==',booking.detailer), window._where('date','==',formatDate(dateStr)));
       const snap = await window._getDocs(q);
       const booked = snap.docs.map(d => d.data().time);
-
       if (booked.length >= MAX_PER_DAY) {
-        wrap.innerHTML = '';
-        document.getElementById('day-full').style.display = 'block';
-        booking.date = '';
-        // mark day as full in calendar
-        const dayEl = document.querySelector(`[onclick="pickDate('${dateStr}', ${dow})"]`);
-        if (dayEl) { dayEl.classList.remove('cal-available','cal-sat'); dayEl.classList.add('cal-full'); dayEl.removeAttribute('onclick'); }
+        wrap.innerHTML = ''; document.getElementById('day-full').style.display = 'block'; booking.date = '';
       } else {
-        const isSat = dow === 6;
-        const slots = isSat ? SATURDAY_SLOTS : WEEKDAY_SLOTS;
+        const slots = dow === 6 ? SATURDAY_SLOTS : WEEKDAY_SLOTS;
+        wrap.style.display = 'grid'; wrap.style.gridTemplateColumns = 'repeat(3,1fr)'; wrap.style.gap = '8px';
         wrap.innerHTML = slots.map(t => {
-          const isBooked = booked.includes(t);
-          return `<div class="time-slot${isBooked ? ' booked' : ''}" ${isBooked ? '' : `onclick="selectTime('${t}', this)"`}>${t}</div>`;
+          const b = booked.includes(t);
+          return `<div class="time-slot${b?' booked':''}" ${b?'':` onclick="selectTime('${t}',this)"`}>${t}</div>`;
         }).join('');
-        // wrap in grid
-        const el = document.getElementById('time-slots-wrap');
-        el.style.display = 'grid';
-        el.style.gridTemplateColumns = 'repeat(3, 1fr)';
-        el.style.gap = '8px';
       }
     } catch(e) {
-      console.error(e);
-      const isSat = dow === 6;
-      const slots = isSat ? SATURDAY_SLOTS : WEEKDAY_SLOTS;
-      wrap.innerHTML = slots.map(t => `<div class="time-slot" onclick="selectTime('${t}', this)">${t}</div>`).join('');
+      const slots = dow === 6 ? SATURDAY_SLOTS : WEEKDAY_SLOTS;
+      wrap.style.display = 'grid'; wrap.style.gridTemplateColumns = 'repeat(3,1fr)'; wrap.style.gap = '8px';
+      wrap.innerHTML = slots.map(t => `<div class="time-slot" onclick="selectTime('${t}',this)">${t}</div>`).join('');
     }
   }
 
@@ -386,58 +473,63 @@
     booking.time = time;
     document.querySelectorAll('.time-slot:not(.booked)').forEach(t => t.classList.remove('selected'));
     el.classList.add('selected');
-    document.getElementById('next3').disabled = false;
+    document.getElementById('next4').disabled = false;
   }
 
   function formatDate(val) {
-    return new Date(val + 'T00:00:00').toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  }
-
-  function selectDetailer(name, el) {
-    booking.detailer = name;
-    document.querySelectorAll('.staff-card').forEach(c => c.classList.remove('selected'));
-    el.classList.add('selected');
-    document.getElementById('next1').disabled = false;
-    booking.date = '';
-    booking.time = '';
-    document.getElementById('selected-date-label').textContent = 'No date selected';
-    document.getElementById('time-slots-wrap').innerHTML = '<div class="slots-placeholder">Select a date to see available times</div>';
-    document.getElementById('day-full').style.display = 'none';
-    document.getElementById('next3').disabled = true;
-    renderCal();
-  }
-
-  function selectService(name, price, duration, el) {
-    booking.service = name;
-    booking.price = price;
-    booking.duration = duration;
-    document.querySelectorAll('.service-option').forEach(c => c.classList.remove('selected'));
-    el.classList.add('selected');
-    document.getElementById('next2').disabled = false;
+    return new Date(val+'T00:00:00').toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   }
 
   function goTo(step) {
+    // tier2 skips detailer step — auto assigns jordan
+    if (step === 2 && booking.vehicleTier === 'tier2') {
+      booking.detailer = 'Jordan';
+      document.getElementById('detailer-title').textContent = 'Booked with Jordan';
+      document.getElementById('detailer-sub').textContent = 'Jordan handles larger vehicles and will confirm your exact price before the appointment.';
+      document.getElementById('staff-grid').style.display = 'none';
+      document.getElementById('next2').disabled = false;
+    }
+    if (step === 2 && booking.vehicleTier === 'tier1') {
+      document.getElementById('staff-grid').style.display = 'grid';
+      document.getElementById('detailer-title').textContent = 'Who would you like to book with?';
+      document.getElementById('detailer-sub').textContent = '';
+    }
+    if (step === 3) buildServices();
+    if (step === 5) renderSummary();
+
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    const totalSteps = 5;
     document.querySelectorAll('.step').forEach((s, i) => {
       s.classList.remove('active','done');
       if (i + 1 < step) s.classList.add('done');
       if (i + 1 === step) s.classList.add('active');
     });
     document.getElementById('panel' + step).classList.add('active');
-    if (step === 4) renderSummary();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function renderSummary() {
+    const isEstimate = booking.vehicleTier === 'tier2';
     document.getElementById('booking-summary').innerHTML = `
       <div class="summary-title">Booking Summary</div>
+      <div class="summary-row"><span class="summary-label">Vehicle</span><span class="summary-value">${booking.vehicle}</span></div>
       <div class="summary-row"><span class="summary-label">Detailer</span><span class="summary-value">${booking.detailer}</span></div>
-      <div class="summary-row"><span class="summary-label">Service</span><span class="summary-value">${booking.service}</span></div>
-      <div class="summary-row"><span class="summary-label">Price</span><span class="summary-value">${booking.price}</span></div>
-      <div class="summary-row"><span class="summary-label">Duration</span><span class="summary-value">${booking.duration}</span></div>
+      <div class="summary-row"><span class="summary-label">Service</span><span class="summary-value">${booking.serviceName}</span></div>
+      <div class="summary-row"><span class="summary-label">Price</span><span class="summary-value">${booking.price}${isEstimate ? ' <span style="font-size:11px;color:rgba(240,242,245,0.4);">(estimate)</span>' : ''}</span></div>
       <div class="summary-row"><span class="summary-label">Date</span><span class="summary-value">${formatDate(booking.date)}</span></div>
       <div class="summary-row"><span class="summary-label">Time</span><span class="summary-value">${booking.time}</span></div>
     `;
+    if (isEstimate) {
+      document.getElementById('price-estimate-wrap').innerHTML = `
+        <div class="price-estimate">
+          <div class="price-estimate-label">Price Note</div>
+          <div class="price-estimate-val">${booking.price} estimated</div>
+          <div class="price-estimate-note">Jordan will reach out before your appointment to confirm the exact price based on your vehicle's condition.</div>
+        </div>
+      `;
+    } else {
+      document.getElementById('price-estimate-wrap').innerHTML = '';
+    }
   }
 
   async function submitBooking() {
@@ -446,43 +538,43 @@
     const email = document.getElementById('email').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const errEl = document.getElementById('error-msg');
-    if (!fname || !lname || !email) {
+    if (!fname || !lname || !email || !phone) {
       errEl.style.display = 'block';
-      errEl.textContent = 'Please fill in your name and email.';
+      errEl.textContent = 'Please fill in all required fields including your phone number.';
       return;
     }
     const btn = document.getElementById('submit-btn');
-    btn.disabled = true;
-    btn.textContent = 'Submitting...';
+    btn.disabled = true; btn.textContent = 'Submitting...';
     errEl.style.display = 'none';
+    const isEstimate = booking.vehicleTier === 'tier2';
     const params = {
       customer_name: fname + ' ' + lname,
       to_email: email,
-      customer_phone: phone || 'Not provided',
-      service: booking.service,
+      customer_phone: phone,
+      vehicle: booking.vehicle,
+      service: booking.serviceName,
       detailer: booking.detailer,
       date: formatDate(booking.date),
       time: booking.time,
-      price: booking.price
+      price: booking.price + (isEstimate ? ' (estimate)' : ''),
     };
     try {
-      await window._addDoc(window._collection(window._db, 'bookings'), { ...params, createdAt: new Date().toISOString() });
-      await emailjs.send('service_mxno1sf', 'template_7xg78nt', params);
-      await emailjs.send('service_mxno1sf', 'template_g0a10zq', params);
+      await window._addDoc(window._collection(window._db,'bookings'), { ...params, tier: booking.vehicleTier, createdAt: new Date().toISOString() });
+      await emailjs.send('service_mxno1sf','template_7xg78nt', params);
+      await emailjs.send('service_mxno1sf','template_g0a10zq', params);
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.step').forEach(s => s.classList.add('done'));
+      if (isEstimate) document.getElementById('success-msg').innerHTML = 'Jordan will reach out to confirm your exact price before the appointment. Questions? Call <strong>(801) 348-4269</strong>.';
       document.getElementById('panel-success').classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch(err) {
       console.error(err);
       errEl.style.display = 'block';
       errEl.textContent = 'Something went wrong. Please try again or call (801) 348-4269.';
-      btn.disabled = false;
-      btn.textContent = 'Confirm Booking →';
+      btn.disabled = false; btn.textContent = 'Confirm Booking →';
     }
   }
 
-  // init calendar
   renderCal();
 </script>
 </body>
