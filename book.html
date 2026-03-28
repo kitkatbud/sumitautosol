@@ -46,6 +46,7 @@
     color:var(--ink);outline:none;transition:border-color 0.2s;width:100%;cursor:pointer;
   }
   input[type="date"]:focus{border-color:var(--accent);}
+  .day-full{font-size:13px;color:#c03232;background:rgba(200,50,50,0.06);border:0.5px solid rgba(200,50,50,0.15);border-radius:8px;padding:10px 14px;grid-column:span 3;text-align:center;display:none;}
   .time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:0.5rem;}
   .time-slot{background:#fff;border:0.5px solid var(--border);border-radius:8px;padding:9px 10px;font-size:13px;font-weight:500;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;color:var(--ink);}
   .time-slot:hover:not(.booked){border-color:var(--accent);}
@@ -169,13 +170,14 @@
       <div>
         <div class="dt-label">Date (Mon–Fri only)</div>
         <input type="date" id="booking-date" onchange="handleDateChange(this)"/>
-        <p class="date-err" id="date-error">Weekdays only (Mon–Fri).</p>
+        <p class="date-err" id="date-error">Weekdays and Saturdays only. Sundays unavailable.</p>
       </div>
       <div>
         <div class="dt-label">Available Times</div>
         <div class="time-slots" id="time-slots">
           <div class="slots-loading">Select a date first</div>
         </div>
+        <div class="day-full" id="day-full">This day is fully booked. Please choose another date.</div>
       </div>
     </div>
     <div class="panel-nav">
@@ -252,19 +254,26 @@
 <script>
   emailjs.init("wFyaJ2VQNG2SgkbJW");
 
-  const ALL_SLOTS = ['9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM'];
+  const WEEKDAY_SLOTS = ['10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM'];
+  const SATURDAY_SLOTS = ['6:00 AM','7:00 AM','8:00 AM','9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM'];
+  const MAX_PER_DAY = 4;
   const booking = { detailer:'', service:'', price:'', duration:'', date:'', time:'' };
+
+  // lock past dates
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('booking-date').setAttribute('min', today);
+  document.getElementById('booking-date').setAttribute('max', '2026-05-22');
 
   function selectDetailer(name, el) {
     booking.detailer = name;
     document.querySelectorAll('.staff-card').forEach(c => c.classList.remove('selected'));
     el.classList.add('selected');
     document.getElementById('next1').disabled = false;
-    // reset date/time if switching detailer
     booking.date = '';
     booking.time = '';
     document.getElementById('booking-date').value = '';
     renderSlots([]);
+    document.getElementById('day-full').style.display = 'none';
   }
 
   function selectService(name, price, duration, el) {
@@ -281,7 +290,7 @@
     const day = d.getDay();
     const err = document.getElementById('date-error');
 
-    if (day === 0 || day === 6) {
+    if (day === 0) {
       err.style.display = 'block';
       booking.date = '';
       booking.time = '';
@@ -294,6 +303,7 @@
     booking.date = input.value;
     booking.time = '';
     document.getElementById('next3').disabled = true;
+    document.getElementById('day-full').style.display = 'none';
 
     // fetch booked slots for this detailer + date
     const slotsEl = document.getElementById('time-slots');
@@ -307,7 +317,14 @@
       );
       const snap = await window._getDocs(q);
       const booked = snap.docs.map(d => d.data().time);
-      renderSlots(booked);
+
+      if (booked.length >= MAX_PER_DAY) {
+        slotsEl.innerHTML = '';
+        document.getElementById('day-full').style.display = 'block';
+        booking.date = '';
+      } else {
+        renderSlots(booked);
+      }
     } catch(e) {
       console.error(e);
       renderSlots([]);
@@ -324,7 +341,9 @@
       el.innerHTML = '<div class="slots-loading">Select a date first</div>';
       return;
     }
-    el.innerHTML = ALL_SLOTS.map(t => {
+    const isSat = new Date(booking.date + 'T00:00:00').getDay() === 6;
+    const slots = isSat ? SATURDAY_SLOTS : WEEKDAY_SLOTS;
+    el.innerHTML = slots.map(t => {
       const isBooked = bookedTimes.includes(t);
       return `<div class="time-slot${isBooked ? ' booked' : ''}" ${isBooked ? '' : `onclick="selectTime('${t}', this)"`}>${t}</div>`;
     }).join('');
