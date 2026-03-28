@@ -162,23 +162,20 @@
         <div class="vehicle-name">Sedan / Coupe</div>
         <div class="vehicle-price">$120</div>
       </div>
-      <div class="vehicle-card tier2" onclick="selectVehicle('SUV','$160','tier2',this)">
+      <div class="vehicle-card" onclick="selectVehicle('SUV','$160','tier2',this)">
         <div class="vehicle-icon">🚙</div>
         <div class="vehicle-name">SUV</div>
         <div class="vehicle-price">$160</div>
-        <span class="vehicle-badge badge-jordan">Jordan handles</span>
       </div>
-      <div class="vehicle-card tier2" onclick="selectVehicle('Van / Minivan','$180','tier2',this)">
+      <div class="vehicle-card" onclick="selectVehicle('Van / Minivan','$180','tier2',this)">
         <div class="vehicle-icon">🚐</div>
         <div class="vehicle-name">Van / Minivan</div>
         <div class="vehicle-price">$180</div>
-        <span class="vehicle-badge badge-jordan">Jordan handles</span>
       </div>
-      <div class="vehicle-card tier2" onclick="selectVehicle('Large Truck','$200','tier2',this)">
+      <div class="vehicle-card" onclick="selectVehicle('Large Truck','$200','tier2',this)">
         <div class="vehicle-icon">🛻</div>
         <div class="vehicle-name">Large Truck</div>
         <div class="vehicle-price">$200</div>
-        <span class="vehicle-badge badge-jordan">Jordan handles</span>
       </div>
       <div class="vehicle-card tier3" onclick="goToQuote()">
         <div class="vehicle-icon">✨</div>
@@ -483,11 +480,9 @@
   function goTo(step) {
     // tier2 skips detailer step — auto assigns jordan
     if (step === 2 && booking.vehicleTier === 'tier2') {
-      booking.detailer = 'Jordan';
-      document.getElementById('detailer-title').textContent = 'Booked with Jordan';
-      document.getElementById('detailer-sub').textContent = 'Jordan handles larger vehicles and will confirm your exact price before the appointment.';
-      document.getElementById('staff-grid').style.display = 'none';
-      document.getElementById('next2').disabled = false;
+      document.getElementById('staff-grid').style.display = 'grid';
+      document.getElementById('detailer-title').textContent = 'Who would you like to book with?';
+      document.getElementById('detailer-sub').textContent = 'Price shown is an estimate — your detailer will confirm the exact price before the appointment.';
     }
     if (step === 2 && booking.vehicleTier === 'tier1') {
       document.getElementById('staff-grid').style.display = 'grid';
