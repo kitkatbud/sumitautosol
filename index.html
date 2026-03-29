@@ -5,18 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Alpine Auto Solutions</title>
 <link rel="stylesheet" href="style.css"/>
-<style>
-  /* HAMBURGER */
-  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
-  .hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:all 0.2s;}
-  .mobile-menu{display:none;position:fixed;inset:0;background:rgba(240,242,245,0.97);backdrop-filter:blur(16px);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:2rem;}
-  .mobile-menu.open{display:flex;}
-  .mobile-menu a{font-size:28px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);}
-  .mobile-menu a:hover{color:var(--accent);}
-  .mobile-menu-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;font-size:28px;cursor:pointer;color:var(--ink);}
-  .mobile-book{margin-top:1rem;}
-  @media(max-width:768px){.hamburger{display:flex;}}
-</style>
+
 </head>
 <body>
 
@@ -29,23 +18,30 @@
     <li><a href="quote.html">Get a Quote</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <button class="hamburger" onclick="openMobileMenu()"><span></span><span></span><span></span></button>
+  
   <div class="nav-right">
     <span class="nav-phone">(801) 348-4269</span>
     <a href="book.html" class="btn-main">Book Now</a>
   </div>
 
-<div class="hamburger" onclick="document.getElementById('mobile-menu').classList.add('open')">
+
+
+<button class="hamburger" id="ham-btn" aria-label="Menu">
   <span></span><span></span><span></span>
-</div>
+</button>
 <div class="mobile-menu" id="mobile-menu">
-  <span class="mobile-close" onclick="document.getElementById('mobile-menu').classList.remove('open')">✕</span>
-  <a href="index.html" onclick="document.getElementById('mobile-menu').classList.remove('open')">Home</a>
-  <a href="services.html" onclick="document.getElementById('mobile-menu').classList.remove('open')">Services</a>
-  <a href="book.html" onclick="document.getElementById('mobile-menu').classList.remove('open')">Book</a>
-  <a href="quote.html" onclick="document.getElementById('mobile-menu').classList.remove('open')">Get a Quote</a>
-  <a href="contact.html" onclick="document.getElementById('mobile-menu').classList.remove('open')">Contact</a>
+  <button class="mobile-close" id="mob-close">&#10005;</button>
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="book.html">Book</a>
+  <a href="quote.html">Get a Quote</a>
+  <a href="contact.html">Contact</a>
 </div>
+<script>
+  document.getElementById('ham-btn').onclick=function(){document.getElementById('mobile-menu').classList.add('open');document.body.style.overflow='hidden';};
+  document.getElementById('mob-close').onclick=function(){document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow='';};
+  document.querySelectorAll('.mobile-menu a').forEach(function(a){a.onclick=function(){document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow='';};});
+</script>
 </nav>
 
 <section class="hero">
@@ -151,19 +147,7 @@
 </footer>
 
 
-<div class="mobile-menu" id="mobile-menu">
-  <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
-  <a href="index.html" onclick="closeMobileMenu()">Home</a>
-  <a href="services.html" onclick="closeMobileMenu()">Services</a>
-  <a href="book.html" onclick="closeMobileMenu()">Book</a>
-  <a href="quote.html" onclick="closeMobileMenu()">Get a Quote</a>
-  <a href="contact.html" onclick="closeMobileMenu()">Contact</a>
-  <a href="book.html" class="btn-main mobile-book" onclick="closeMobileMenu()">Book Now</a>
-</div>
-<script>
-function openMobileMenu(){document.getElementById('mobile-menu').classList.add('open');document.body.style.overflow='hidden';}
-function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow='';}
-</script>
+
 
 </body>
 </html>
