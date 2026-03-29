@@ -187,23 +187,16 @@ footer{background:#141f2a;padding:1.5rem 2.5rem;display:flex;justify-content:spa
 /* ── HAMBURGER ── */
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
 .hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;}
-.mobile-menu{display:none;position:fixed;inset:0;background:rgba(240,242,245,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;}
+.mobile-menu{display:none;position:fixed;inset:0;background:#f0f2f5;z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2rem;}
 .mobile-menu.open{display:flex;}
-.mobile-menu a{font-size:20px;font-weight:600;color:var(--ink);letter-spacing:-0.02em;transition:color 0.15s;}
+.mobile-menu a{font-size:18px;font-weight:600;color:var(--ink);letter-spacing:-0.02em;padding:0.6rem 1.5rem;}
 .mobile-menu a:hover{color:var(--accent);}
-.mobile-close{position:absolute;top:1.5rem;right:1.5rem;font-size:22px;cursor:pointer;color:var(--ink2);background:none;border:none;font-family:var(--font);}
-
-/* ── HAMBURGER ── */
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
-.hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;}
-.mobile-menu{display:none;position:fixed;inset:0;background:#f0f2f5;z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;}
-.mobile-menu.open{display:flex;}
-.mobile-menu a{font-size:26px;font-weight:700;color:var(--ink);letter-spacing:-0.02em;}
-.mobile-menu a:hover{color:var(--accent);}
-.mobile-close{position:absolute;top:1.5rem;right:1.5rem;font-size:28px;cursor:pointer;color:var(--ink2);background:none;border:none;font-family:var(--font);}
+.mobile-close{position:absolute;top:1.5rem;right:1.5rem;font-size:26px;cursor:pointer;color:var(--ink2);background:none;border:none;font-family:var(--font);}
 
 /* ── MOBILE ── */
 @media(max-width:768px){
+  html,body{overflow-x:hidden;}
+
   .hamburger{display:flex;}
   .nav-links{display:none;}
   .nav-phone{display:none;}
@@ -246,16 +239,16 @@ footer{background:#141f2a;padding:1.5rem 2.5rem;display:flex;justify-content:spa
 
   .book-wrapper{padding:2rem 1.25rem;}
 
-  .steps{overflow-x:auto;-webkit-overflow-scrolling:touch;}
-  .step{padding:0.6rem 0.75rem;min-width:56px;}
-  .step-num{font-size:15px;}
-  .step{font-size:9px;}
+  .steps{overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap;width:100%;}
+  .step{display:inline-flex;padding:0.6rem 0.75rem;min-width:70px;white-space:nowrap;}
+  .step-num{font-size:14px;}
+  .step-label{font-size:9px;white-space:nowrap;}
 
   .staff-grid{grid-template-columns:1fr 1fr;max-width:100%;}
   .service-options{max-width:100%;}
 
-  .vehicle-grid{grid-template-columns:1fr 1fr;max-width:100%;}
-  .vehicle-card{padding:1rem;}
+  .vehicle-grid{grid-template-columns:repeat(2,1fr);max-width:100%;overflow:hidden;}
+  .vehicle-card{padding:1rem;min-width:0;}
   .vehicle-icon{font-size:22px;}
   .vehicle-name{font-size:14px;}
   .vehicle-price{font-size:12px;}
