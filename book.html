@@ -6,6 +6,18 @@
 <title>Book — Alpine Auto Solutions</title>
 <link rel="stylesheet" href="style.css"/>
 <style>
+  /* HAMBURGER */
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+  .hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:all 0.2s;}
+  .mobile-menu{display:none;position:fixed;inset:0;background:rgba(240,242,245,0.97);backdrop-filter:blur(16px);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:2rem;}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{font-size:28px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);}
+  .mobile-menu a:hover{color:var(--accent);}
+  .mobile-menu-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;font-size:28px;cursor:pointer;color:var(--ink);}
+  .mobile-book{margin-top:1rem;}
+  @media(max-width:768px){.hamburger{display:flex;}}
+</style>
+<style>
   .book-wrapper{max-width:980px;margin:0 auto;padding:4rem 2.5rem;}
   .steps{display:flex;margin-bottom:3rem;border:0.5px solid var(--border);border-radius:12px;overflow:hidden;}
   .step{flex:1;padding:1rem 1.5rem;font-size:12px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink3);background:#fff;border-right:0.5px solid var(--border);cursor:default;transition:all 0.2s;}
@@ -126,10 +138,23 @@
     <li><a href="quote.html">Get a Quote</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
+  <button class="hamburger" onclick="openMobileMenu()"><span></span><span></span><span></span></button>
   <div class="nav-right">
     <span class="nav-phone">(801) 348-4269</span>
     <a href="book.html" class="btn-main">Book Now</a>
   </div>
+
+<div class="hamburger" onclick="document.getElementById('mobile-menu').classList.add('open')">
+  <span></span><span></span><span></span>
+</div>
+<div class="mobile-menu" id="mobile-menu">
+  <span class="mobile-close" onclick="document.getElementById('mobile-menu').classList.remove('open')">✕</span>
+  <a href="index.html" onclick="document.getElementById('mobile-menu').classList.remove('open')">Home</a>
+  <a href="services.html" onclick="document.getElementById('mobile-menu').classList.remove('open')">Services</a>
+  <a href="book.html" onclick="document.getElementById('mobile-menu').classList.remove('open')">Book</a>
+  <a href="quote.html" onclick="document.getElementById('mobile-menu').classList.remove('open')">Get a Quote</a>
+  <a href="contact.html" onclick="document.getElementById('mobile-menu').classList.remove('open')">Contact</a>
+</div>
 </nav>
 
 <div class="page-header">
@@ -572,5 +597,20 @@
 
   renderCal();
 </script>
+
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
+  <a href="index.html" onclick="closeMobileMenu()">Home</a>
+  <a href="services.html" onclick="closeMobileMenu()">Services</a>
+  <a href="book.html" onclick="closeMobileMenu()">Book</a>
+  <a href="quote.html" onclick="closeMobileMenu()">Get a Quote</a>
+  <a href="contact.html" onclick="closeMobileMenu()">Contact</a>
+  <a href="book.html" class="btn-main mobile-book" onclick="closeMobileMenu()">Book Now</a>
+</div>
+<script>
+function openMobileMenu(){document.getElementById('mobile-menu').classList.add('open');document.body.style.overflow='hidden';}
+function closeMobileMenu(){document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow='';}
+</script>
+
 </body>
 </html>
