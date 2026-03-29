@@ -184,14 +184,32 @@ footer{background:#141f2a;padding:1.5rem 2.5rem;display:flex;justify-content:spa
 .info-value a{color:var(--accent2);}
 
 
-/* ── HAMBURGER ── */
+/* ── HAMBURGER / MOBILE MENU ── */
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
 .hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;}
-.mobile-menu{display:none;position:fixed;inset:0;background:#f0f2f5;z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2rem;}
+.mobile-menu{
+  display:none;position:fixed;inset:0;
+  background:#f0f2f5;
+  z-index:999;
+  flex-direction:column;align-items:center;justify-content:center;
+  gap:0.75rem;
+  padding:5rem 2rem 3rem;
+}
 .mobile-menu.open{display:flex;}
-.mobile-menu a{font-size:18px;font-weight:600;color:var(--ink);letter-spacing:-0.02em;padding:0.6rem 1.5rem;}
-.mobile-menu a:hover{color:var(--accent);}
-.mobile-close{position:absolute;top:1.5rem;right:1.5rem;font-size:26px;cursor:pointer;color:var(--ink2);background:none;border:none;font-family:var(--font);}
+.mobile-menu a{
+  font-size:16px;font-weight:600;color:var(--ink);
+  letter-spacing:-0.02em;
+  padding:0.9rem 0;
+  background:#fff;
+  border:0.5px solid var(--border);
+  border-radius:12px;
+  width:100%;max-width:300px;
+  text-align:center;
+  box-shadow:0 2px 8px rgba(28,43,58,0.06);
+  transition:border-color 0.15s,background 0.15s;
+}
+.mobile-menu a:hover{border-color:var(--accent);background:rgba(74,127,165,0.04);color:var(--accent);}
+.mobile-close{position:absolute;top:1.25rem;right:1.25rem;font-size:22px;cursor:pointer;color:var(--ink2);background:#fff;border:0.5px solid var(--border);border-radius:8px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-family:var(--font);}
 
 /* ── MOBILE ── */
 @media(max-width:768px){
@@ -239,19 +257,20 @@ footer{background:#141f2a;padding:1.5rem 2.5rem;display:flex;justify-content:spa
 
   .book-wrapper{padding:2rem 1.25rem;}
 
-  .steps{overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap;width:100%;}
-  .step{display:inline-flex;padding:0.6rem 0.75rem;min-width:70px;white-space:nowrap;}
-  .step-num{font-size:14px;}
-  .step-label{font-size:9px;white-space:nowrap;}
+  .steps{overflow-x:auto;-webkit-overflow-scrolling:touch;display:flex;width:100%;}
+  .step{flex:none;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0.65rem 0.9rem;min-width:62px;}
+  .step-num{font-size:13px;font-weight:700;display:block;margin-bottom:2px;}
+  .step-label{font-size:8px;white-space:nowrap;display:block;letter-spacing:0.04em;text-transform:uppercase;}
 
   .staff-grid{grid-template-columns:1fr 1fr;max-width:100%;}
   .service-options{max-width:100%;}
 
   .vehicle-grid{grid-template-columns:repeat(2,1fr);max-width:100%;overflow:hidden;}
-  .vehicle-card{padding:1rem;min-width:0;}
-  .vehicle-icon{font-size:22px;}
-  .vehicle-name{font-size:14px;}
-  .vehicle-price{font-size:12px;}
+  .vehicle-card{padding:0.85rem 0.75rem;min-width:0;text-align:center;}
+  .vehicle-icon{font-size:18px;margin-bottom:0;}
+  .vehicle-name{font-size:13px;}
+  .vehicle-price{font-size:11px;}
+  .vehicle-badge{font-size:9px;}
 
   .datetime-wrap{grid-template-columns:1fr;gap:1.5rem;max-width:100%;}
   .cal{width:100%;}
