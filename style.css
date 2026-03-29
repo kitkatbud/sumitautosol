@@ -154,6 +154,7 @@ nav{
 /* ── FOOTER ── */
 footer{background:#141f2a;padding:1.5rem 2.5rem;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:rgba(240,242,245,0.2);}
 .footer-logo{font-size:15px;font-weight:600;letter-spacing:-0.02em;color:rgba(240,242,245,0.28);}
+.footer-right{display:flex;flex-direction:column;align-items:flex-end;gap:0.25rem;}
 
 /* ── PAGE HEADER ── */
 .page-header{background:var(--dark);padding:5rem 2.5rem 3.5rem;border-bottom:0.5px solid rgba(240,242,245,0.06);}
@@ -253,7 +254,8 @@ footer{background:#141f2a;padding:1.5rem 2.5rem;display:flex;justify-content:spa
   .cta-body{max-width:100%;}
   .btn-cta{width:100%;text-align:center;display:block;}
 
-  footer{flex-direction:column;gap:0.4rem;text-align:center;padding:1.25rem;}
+  footer{flex-direction:column;gap:0.6rem;text-align:center;padding:1.25rem;}
+  .footer-right{align-items:center;}
 
   .page-header{padding:2.5rem 1.25rem 2rem;}
   .page-header-title{font-size:32px;}
