@@ -208,25 +208,20 @@
         <div class="vehicle-name">Motorcycle</div>
         <div class="vehicle-price">From $60</div>
       </div>
-      <div class="vehicle-card" onclick="selectVehicle('Sedan / Coupe','$120','tier1',this)">
+      <div class="vehicle-card" onclick="selectVehicle('Sedan / Small Car','$100','tier1',this)">
         <div class="vehicle-icon">🚗</div>
-        <div class="vehicle-name">Sedan / Coupe</div>
-        <div class="vehicle-price">$120</div>
+        <div class="vehicle-name">Sedan / Small Car</div>
+        <div class="vehicle-price">From $60</div>
       </div>
-      <div class="vehicle-card" onclick="selectVehicle('SUV','$160','tier2',this)">
+      <div class="vehicle-card" onclick="selectVehicle('SUV / Crossover / Truck','$140','tier1',this)">
         <div class="vehicle-icon">🚙</div>
-        <div class="vehicle-name">SUV</div>
-        <div class="vehicle-price">$160</div>
+        <div class="vehicle-name">SUV / Crossover / Truck</div>
+        <div class="vehicle-price">From $60</div>
       </div>
-      <div class="vehicle-card" onclick="selectVehicle('Van / Minivan','$180','tier2',this)">
-        <div class="vehicle-icon">🚐</div>
-        <div class="vehicle-name">Van / Minivan</div>
-        <div class="vehicle-price">$180</div>
-      </div>
-      <div class="vehicle-card" onclick="selectVehicle('Large Truck','$200','tier2',this)">
+      <div class="vehicle-card" onclick="selectVehicle('Large Truck / Van / Full-Size SUV','$180','tier1',this)">
         <div class="vehicle-icon">🛻</div>
-        <div class="vehicle-name">Large Truck</div>
-        <div class="vehicle-price">$200</div>
+        <div class="vehicle-name">Large Truck / Van / Full-Size SUV</div>
+        <div class="vehicle-price">From $60</div>
       </div>
       <div class="vehicle-card tier3" onclick="goToQuote()">
         <div class="vehicle-icon">✨</div>
@@ -351,7 +346,7 @@
 
 <footer>
   <div class="footer-logo">Alpine Auto Solutions</div>
-  <span>(801) 348-4269 · Mon–Fri 10AM–6PM · Sat 6AM–7PM · Utah</span>
+  <span>(801) 348-4269 · Mon–Fri 10AM–6PM · Sat 6AM–7PM · Utah · <a href="https://instagram.com/alpineautosolutions" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;opacity:0.7;">@alpineautosolutions</a></span>
 </footer>
 
 <!-- Firebase -->
@@ -411,19 +406,18 @@
     const v = booking.vehicle;
     let services = [];
 
-    if (booking.vehicleTier === 'tier1') {
-      sub.textContent = '';
+    sub.textContent = '';
+    if (v === 'Motorcycle') {
       services = [
-        { name: 'Interior Detail', price: booking.price, dur: '1 hr 40 min', note: '' },
-        { name: 'Interior + Exterior', price: booking.price === '$120' ? '$120' : booking.price, dur: '2 hrs', note: 'Best value' },
-        { name: 'Exterior Wash & Wax', price: v === 'Motorcycle' ? '$60' : '$80', dur: '45 min', note: '' },
+        { name: 'Interior Detail', price: '$80', dur: '1 hr', note: '' },
+        { name: 'Complete Detailing Package', price: '$80', dur: '1 hr 30 min', note: 'Best value' },
+        { name: 'Exterior Wash & Wax', price: '$60', dur: '45 min', note: '' },
       ];
     } else {
-      sub.textContent = 'Jordan will confirm the exact price before your appointment.';
       services = [
-        { name: 'Interior Detail', price: booking.price, dur: 'Est. 2–3 hrs', note: 'Estimate — Jordan confirms' },
-        { name: 'Interior + Exterior', price: booking.price, dur: 'Est. 3–4 hrs', note: 'Best value · Estimate' },
-        { name: 'Exterior Wash & Wax', price: booking.price, dur: 'Est. 1 hr', note: 'Estimate — Jordan confirms' },
+        { name: 'Interior Detail', price: '$100', dur: '1 hr 40 min', note: '' },
+        { name: 'Complete Detailing Package', price: booking.price, dur: '2 hrs', note: 'Best value' },
+        { name: 'Exterior Wash & Wax', price: '$60', dur: '45 min', note: '' },
       ];
     }
 
@@ -435,7 +429,6 @@
         </div>
         <div>
           <div class="service-option-price">${s.price}</div>
-          ${booking.vehicleTier === 'tier2' ? '<div class="service-option-note">Estimate</div>' : ''}
         </div>
       </div>
     `).join('');
