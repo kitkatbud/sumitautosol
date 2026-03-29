@@ -29,6 +29,7 @@
 <button class="hamburger" id="ham-btn" aria-label="Menu">
   <span></span><span></span><span></span>
 </button>
+</nav>
 <div class="mobile-menu" id="mobile-menu">
   <button class="mobile-close" id="mob-close">&#10005;</button>
   <a href="index.html">Home</a>
@@ -42,7 +43,6 @@
   document.getElementById('mob-close').onclick=function(){document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow='';};
   document.querySelectorAll('.mobile-menu a').forEach(function(a){a.onclick=function(){document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow='';};});
 </script>
-</nav>
 
 <section class="hero">
   <img class="hero-img"
