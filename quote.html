@@ -9,6 +9,7 @@
 <style>
   .quote-layout{display:grid;grid-template-columns:1.1fr 0.9fr;gap:5rem;padding:4rem 2.5rem;max-width:1100px;margin:0 auto;}
   .quote-services{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:2.5rem;}
+  @media(max-width:768px){.quote-layout{display:flex;flex-direction:column;gap:2rem;padding:2rem 1.25rem;}.quote-services{grid-template-columns:1fr;}.form-row-2{grid-template-columns:1fr !important;}}
   .quote-service-card{background:#fff;border:0.5px solid var(--border);border-radius:14px;padding:1.25rem;display:flex;flex-direction:column;gap:0.4rem;}
   .qs-icon{font-size:22px;}
   .qs-name{font-size:15px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);}
@@ -78,7 +79,7 @@
     </div>
 
     <form id="quote-form">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div class="form-row">
         <div class="form-group"><label>First Name <span style="color:#c03232;">*</span></label><input type="text" id="fname" placeholder="John" required/></div>
         <div class="form-group"><label>Last Name <span style="color:#c03232;">*</span></label><input type="text" id="lname" placeholder="Smith" required/></div>
       </div>

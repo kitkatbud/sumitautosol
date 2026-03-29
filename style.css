@@ -282,3 +282,17 @@ footer{background:#141f2a;padding:1.5rem 2.5rem;display:flex;justify-content:spa
 
   .time-slots{grid-template-columns:repeat(2,1fr);}
 }
+
+/* ── OVERFLOW FIX ── */
+html, body { overflow-x: hidden; max-width: 100%; }
+
+@media(max-width:768px){
+  .quote-layout{ display:flex !important; flex-direction:column !important; padding:2rem 1.25rem !important; gap:2rem !important; }
+  .quote-services{ grid-template-columns:1fr !important; }
+  .quote-service-card{ padding:1rem; }
+  .qs-icon{ font-size:18px; }
+  .contact-layout{ display:flex !important; flex-direction:column !important; padding:2rem 1.25rem !important; gap:2rem !important; }
+  * { max-width:100%; }
+  .info-box{ max-width:100%; }
+  .form-group input, .form-group textarea, .form-group select{ font-size:16px; }
+}
