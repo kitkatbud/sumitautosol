@@ -111,6 +111,13 @@ nav{
 .strip-num{font-size:34px;font-weight:700;letter-spacing:-0.03em;color:var(--accent2);line-height:1;margin-bottom:0.25rem;}
 .strip-label{font-size:11px;font-weight:400;letter-spacing:0.06em;text-transform:uppercase;color:rgba(240,242,245,0.3);}
 
+/* ── ABOUT / MISSION ── */
+.about-section{padding:4rem 2.5rem;border-bottom:0.5px solid var(--border);background:#fff;}
+.about-inner{max-width:780px;}
+.about-title{font-size:32px;font-weight:700;letter-spacing:-0.03em;color:var(--ink);margin-bottom:1rem;line-height:1.1;}
+.about-body{font-size:15px;font-weight:300;line-height:1.75;color:var(--ink2);max-width:700px;}
+.about-body strong{color:var(--ink);font-weight:600;}
+
 /* ── SECTIONS ── */
 .section{padding:5rem 2.5rem;border-bottom:0.5px solid var(--border);}
 .section-tag{font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;display:flex;align-items:center;gap:8px;}
