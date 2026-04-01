@@ -325,6 +325,7 @@
       </div>
       <div class="form-group"><label>Email</label><input type="email" id="email" placeholder="john@example.com" required/></div>
       <div class="form-group"><label>Phone <span style="color:#c03232;">*</span></label><input type="tel" id="phone" placeholder="(801) 000-0000" required/></div>
+      <div class="form-group"><label>Service Address <span style="color:#c03232;">*</span></label><input type="text" id="address" placeholder="123 Main St, Salt Lake City, UT" required/></div>
     </div>
     <div class="panel-nav">
       <button class="btn-back" onclick="goTo(4)">← Back</button>
@@ -554,6 +555,7 @@
 
   function renderSummary() {
     const isEstimate = booking.vehicleTier === 'tier2';
+    const addrEl = document.getElementById('summary-address'); if(addrEl) addrEl.textContent = document.getElementById('address') ? document.getElementById('address').value || '—' : '—';
     document.getElementById('booking-summary').innerHTML = `
       <div class="summary-title">Booking Summary</div>
       <div class="summary-row"><span class="summary-label">Vehicle</span><span class="summary-value">${booking.vehicle}</span></div>
@@ -562,6 +564,7 @@
       <div class="summary-row"><span class="summary-label">Price</span><span class="summary-value">${booking.price}${isEstimate ? ' <span style="font-size:11px;color:rgba(240,242,245,0.4);">(estimate)</span>' : ''}</span></div>
       <div class="summary-row"><span class="summary-label">Date</span><span class="summary-value">${formatDate(booking.date)}</span></div>
       <div class="summary-row"><span class="summary-label">Time</span><span class="summary-value">${booking.time}</span></div>
+      <div class="summary-row"><span class="summary-label">Address</span><span class="summary-value" id="summary-address">—</span></div>
     `;
     if (isEstimate) {
       document.getElementById('price-estimate-wrap').innerHTML = `
@@ -581,10 +584,11 @@
     const lname = document.getElementById('lname').value.trim();
     const email = document.getElementById('email').value.trim();
     const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
     const errEl = document.getElementById('error-msg');
-    if (!fname || !lname || !email || !phone) {
+    if (!fname || !lname || !email || !phone || !address) {
       errEl.style.display = 'block';
-      errEl.textContent = 'Please fill in all required fields including your phone number.';
+      errEl.textContent = 'Please fill in all required fields including your address.';
       return;
     }
     const btn = document.getElementById('submit-btn');
@@ -595,6 +599,7 @@
       customer_name: fname + ' ' + lname,
       to_email: email,
       customer_phone: phone,
+      address: address,
       vehicle: booking.vehicle,
       service: booking.serviceName,
       detailer: booking.detailer,
