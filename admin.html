@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin — Alpine Auto Solutions</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  /* LOGIN */
+  .login-screen{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;
+    background:var(--dark);
+  }
+  .login-card{
+    background:var(--snow);border-radius:16px;
+    padding:2.5rem;width:100%;max-width:360px;
+    display:flex;flex-direction:column;gap:1.25rem;
+  }
+  .login-logo{font-size:17px;font-weight:600;color:var(--ink);letter-spacing:-0.02em;}
+  .login-logo span{color:var(--accent);}
+  .login-title{font-size:24px;font-weight:700;letter-spacing:-0.03em;color:var(--ink);margin-top:0.25rem;}
+  .login-sub{font-size:14px;font-weight:300;color:var(--ink2);}
+  .login-err{font-size:13px;color:#c03232;display:none;margin-top:-0.5rem;}
+
+  /* ADMIN LAYOUT */
+  .admin-body{background:var(--bg);min-height:100vh;}
+  .admin-wrap{max-width:1100px;margin:0 auto;padding:3rem 2rem;}
+  .admin-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2.5rem;gap:1rem;flex-wrap:wrap;}
+  .admin-title{font-size:30px;font-weight:700;letter-spacing:-0.03em;color:var(--ink);}
+  .admin-sub{font-size:13px;color:var(--ink3);margin-top:0.3rem;}
+  .admin-actions{display:flex;gap:10px;align-items:center;}
+
+  /* STATS */
+  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:2rem;}
+  .stat-card{background:#fff;border:0.5px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;}
+  .stat-num{font-size:34px;font-weight:700;letter-spacing:-0.03em;color:var(--ink);line-height:1;margin-bottom:0.25rem;}
+  .stat-label{font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);}
+
+  /* FILTERS */
+  .filters{display:flex;gap:10px;margin-bottom:1.25rem;flex-wrap:wrap;align-items:center;}
+  .filter-select{
+    background:#fff;border:0.5px solid var(--border);border-radius:8px;
+    padding:8px 12px;font-family:var(--font);font-size:13px;color:var(--ink);
+    outline:none;cursor:pointer;
+  }
+  .filter-select:focus{border-color:var(--accent);}
+  .search-input{
+    background:#fff;border:0.5px solid var(--border);border-radius:8px;
+    padding:8px 14px;font-family:var(--font);font-size:13px;color:var(--ink);
+    outline:none;flex:1;min-width:200px;
+  }
+  .search-input:focus{border-color:var(--accent);}
+
+  /* TABLE */
+  .table-wrap{background:#fff;border:0.5px solid var(--border);border-radius:12px;overflow:hidden;}
+  table{width:100%;border-collapse:collapse;}
+  thead tr{background:var(--dark);}
+  th{
+    color:rgba(240,242,245,0.5);font-size:11px;font-weight:500;
+    letter-spacing:0.06em;text-transform:uppercase;
+    padding:12px 16px;text-align:left;white-space:nowrap;
+  }
+  td{
+    padding:13px 16px;font-size:14px;color:var(--ink);
+    border-bottom:0.5px solid var(--border);vertical-align:top;
+  }
+  tr:last-child td{border-bottom:none;}
+  tbody tr:hover td{background:rgba(28,43,58,0.015);}
+  .customer-name{font-weight:600;color:var(--ink);font-size:14px;}
+  .customer-detail{font-size:12px;color:var(--ink3);margin-top:2px;}
+  .badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.04em;padding:3px 10px;border-radius:20px;}
+  .badge-hudson{background:rgba(74,127,165,0.1);color:var(--accent);}
+  .badge-jordan{background:rgba(28,43,58,0.07);color:var(--ink2);}
+  .table-empty{text-align:center;padding:4rem 2rem;color:var(--ink3);font-size:15px;}
+  .table-loading{text-align:center;padding:3rem;color:var(--ink3);font-size:14px;}
+
+  /* BUTTONS */
+  .btn-refresh{
+    background:var(--dark);color:var(--snow);border:none;
+    padding:8px 18px;border-radius:8px;font-family:var(--font);
+    font-size:13px;font-weight:500;cursor:pointer;transition:background 0.2s;
+  }
+  .btn-refresh:hover{background:var(--accent);}
+  .btn-logout{
+    background:transparent;color:var(--ink2);
+    border:0.5px solid var(--border);padding:8px 16px;
+    border-radius:8px;font-family:var(--font);font-size:13px;
+    cursor:pointer;transition:border-color 0.2s,color 0.2s;
+  }
+  .btn-logout:hover{border-color:var(--accent);color:var(--accent);}
+
+  @media(max-width:768px){
+    .stats-row{grid-template-columns:1fr 1fr;}
+    .admin-wrap{padding:1.5rem 1.25rem;}
+    .table-wrap{overflow-x:auto;}
+    .admin-header{flex-direction:column;}
+    .login-card{margin:1rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="login-screen">
+  <div class="login-card">
+    <div>
+      <div class="login-logo">Alpine <span>Auto Solutions</span></div>
+      <div class="login-title">Admin</div>
+      <div class="login-sub">Staff only — sign in to view bookings</div>
+    </div>
+    <div class="form-group" style="margin:0;">
+      <label>Password</label>
+      <input type="password" id="pw-input" placeholder="••••••••"
+        onkeydown="if(event.key==='Enter')checkPassword()"/>
+    </div>
+    <p class="login-err" id="login-err">Incorrect password. Try again.</p>
+    <button class="btn-cta" style="width:100%;text-align:center;display:block;padding:13px;" onclick="checkPassword()">
+      Sign In
+    </button>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-body" id="admin-screen" style="display:none;">
+  <nav>
+    <a href="index.html" class="logo">Alpine <span>Auto Solutions</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="book.html">Book</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="btn-logout" onclick="logout()">Sign Out</button>
+    </div>
+  </nav>
+
+  <div class="admin-wrap">
+    <div class="admin-header">
+      <div>
+        <div class="admin-title">Bookings</div>
+        <div class="admin-sub" id="last-updated">Loading...</div>
+      </div>
+      <div class="admin-actions">
+        <button class="btn-refresh" onclick="loadBookings()">↻ Refresh</button>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num" id="stat-total">—</div>
+        <div class="stat-label">Total Bookings</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-today">—</div>
+        <div class="stat-label">Today</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-hudson">—</div>
+        <div class="stat-label">Hudson</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-jordan">—</div>
+        <div class="stat-label">Jordan</div>
+      </div>
+    </div>
+
+    <div class="filters">
+      <input class="search-input" id="search" placeholder="Search name, email or phone…" oninput="applyFilters()"/>
+      <select class="filter-select" id="filter-detailer" onchange="applyFilters()">
+        <option value="">All Detailers</option>
+        <option>Hudson</option>
+        <option>Jordan</option>
+      </select>
+      <select class="filter-select" id="filter-vehicle" onchange="applyFilters()">
+        <option value="">All Vehicles</option>
+        <option>Motorcycle</option>
+        <option>Sedan / Coupe</option>
+        <option>SUV</option>
+        <option>Van / Minivan</option>
+        <option>Large Truck</option>
+      </select>
+      <select class="filter-select" id="filter-sort" onchange="applyFilters()">
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+      </select>
+    </div>
+
+    <div class="table-wrap" id="table-wrap">
+      <div class="table-loading">Loading bookings…</div>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+  import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+  const app = initializeApp({
+    apiKey: "AIzaSyAFN69H0F6zPqjOKZ-evKUZWSByXvvQQuQ",
+    authDomain: "summitautosol.firebaseapp.com",
+    projectId: "summitautosol",
+    storageBucket: "summitautosol.firebasestorage.app",
+    messagingSenderId: "116967321496",
+    appId: "1:116967321496:web:ee29f2d685f816eccb05ed"
+  });
+  const db = getFirestore(app);
+  window._db = db;
+  window._collection = collection;
+  window._getDocs = getDocs;
+  window._query = query;
+  window._orderBy = orderBy;
+</script>
+
+<script>
+  const PASS = 'Alpine26!';
+  let allBookings = [];
+
+  function checkPassword() {
+    const val = document.getElementById('pw-input').value;
+    if (val === PASS) {
+      sessionStorage.setItem('aas_admin','1');
+      showAdmin();
+    } else {
+      document.getElementById('login-err').style.display = 'block';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+    }
+  }
+
+  function showAdmin() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-screen').style.display = 'block';
+    loadBookings();
+  }
+
+  function logout() {
+    sessionStorage.removeItem('aas_admin');
+    location.reload();
+  }
+
+  if (sessionStorage.getItem('aas_admin') === '1') {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-screen').style.display = 'block';
+    setTimeout(loadBookings, 400);
+  }
+
+  async function loadBookings() {
+    document.getElementById('table-wrap').innerHTML = '<div class="table-loading">Loading bookings…</div>';
+    try {
+      const q = window._query(window._collection(window._db,'bookings'), window._orderBy('createdAt','desc'));
+      const snap = await window._getDocs(q);
+      allBookings = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      updateStats();
+      applyFilters();
+      const now = new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+      document.getElementById('last-updated').textContent = `Last updated at ${now}`;
+    } catch(e) {
+      console.error(e);
+      document.getElementById('table-wrap').innerHTML = '<div class="table-empty">Failed to load bookings. Check your connection.</div>';
+    }
+  }
+
+  function updateStats() {
+    const todayStr = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    document.getElementById('stat-total').textContent = allBookings.length;
+    document.getElementById('stat-today').textContent = allBookings.filter(b => b.date === todayStr).length;
+    document.getElementById('stat-hudson').textContent = allBookings.filter(b => b.detailer === 'Hudson').length;
+    document.getElementById('stat-jordan').textContent = allBookings.filter(b => b.detailer === 'Jordan').length;
+  }
+
+  function applyFilters() {
+    const search = document.getElementById('search').value.toLowerCase();
+    const detailer = document.getElementById('filter-detailer').value;
+    const vehicle = document.getElementById('filter-vehicle').value;
+    const sort = document.getElementById('filter-sort').value;
+
+    let list = allBookings.filter(b => {
+      const ms = !search ||
+        (b.customer_name||'').toLowerCase().includes(search) ||
+        (b.to_email||'').toLowerCase().includes(search) ||
+        (b.customer_phone||'').includes(search);
+      const md = !detailer || b.detailer === detailer;
+      const mv = !vehicle || b.vehicle === vehicle;
+      return ms && md && mv;
+    });
+    if (sort === 'oldest') list = [...list].reverse();
+    renderTable(list);
+  }
+
+  function renderTable(bookings) {
+    if (!bookings.length) {
+      document.getElementById('table-wrap').innerHTML = '<div class="table-empty">No bookings match your filters</div>';
+      return;
+    }
+    document.getElementById('table-wrap').innerHTML = `
+      <table>
+        <thead><tr>
+          <th>Customer</th>
+          <th>Vehicle</th>
+          <th>Service</th>
+          <th>Detailer</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Price</th>
+          <th>Submitted</th>
+        </tr></thead>
+        <tbody>
+          ${bookings.map(b => `<tr>
+            <td>
+              <div class="customer-name">${b.customer_name||'—'}</div>
+              <div class="customer-detail">${b.to_email||''}</div>
+              <div class="customer-detail">${b.customer_phone||''}</div>
+            </td>
+            <td>${b.vehicle||'—'}</td>
+            <td>${b.service||'—'}</td>
+            <td><span class="badge badge-${(b.detailer||'').toLowerCase()}">${b.detailer||'—'}</span></td>
+            <td style="white-space:nowrap;">${b.date||'—'}</td>
+            <td style="white-space:nowrap;">${b.time||'—'}</td>
+            <td style="font-weight:600;">${b.price||'—'}</td>
+            <td style="font-size:12px;color:var(--ink3);white-space:nowrap;">${b.createdAt ? new Date(b.createdAt).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '—'}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
+</script>
+</body>
+</html>
