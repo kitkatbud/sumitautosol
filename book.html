@@ -382,6 +382,19 @@
   const MAX_PER_DAY = 4;
   const MAX_DATE = new Date('2026-05-22T23:59:59');
   const todayD = new Date(); todayD.setHours(0,0,0,0);
+
+  function isSlotPast(dateStr, timeStr) {
+    const now = new Date();
+    const selected = new Date(dateStr + 'T00:00:00');
+    if (selected > todayD) return false;
+    const [time, meridiem] = timeStr.split(' ');
+    let [h, m] = time.split(':').map(Number);
+    if (meridiem === 'PM' && h !== 12) h += 12;
+    if (meridiem === 'AM' && h === 12) h = 0;
+    const slotDate = new Date(dateStr + 'T00:00:00');
+    slotDate.setHours(h, m, 0, 0);
+    return slotDate <= now;
+  }
   const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
   const booking = { vehicle:'', vehicleTier:'', price:'', detailer:'', service:'', serviceName:'', date:'', time:'' };
@@ -505,14 +518,17 @@
         const slots = dow === 6 ? SATURDAY_SLOTS : WEEKDAY_SLOTS;
         wrap.style.display = 'grid'; wrap.style.gridTemplateColumns = 'repeat(3,1fr)'; wrap.style.gap = '8px';
         wrap.innerHTML = slots.map(t => {
-          const b = booked.includes(t);
+          const b = booked.includes(t) || isSlotPast(dateStr, t);
           return `<div class="time-slot${b?' booked':''}" ${b?'':` onclick="selectTime('${t}',this)"`}>${t}</div>`;
         }).join('');
       }
     } catch(e) {
       const slots = dow === 6 ? SATURDAY_SLOTS : WEEKDAY_SLOTS;
       wrap.style.display = 'grid'; wrap.style.gridTemplateColumns = 'repeat(3,1fr)'; wrap.style.gap = '8px';
-      wrap.innerHTML = slots.map(t => `<div class="time-slot" onclick="selectTime('${t}',this)">${t}</div>`).join('');
+      wrap.innerHTML = slots.map(t => {
+        const b = isSlotPast(dateStr, t);
+        return `<div class="time-slot${b?' booked':''}" ${b?'':` onclick="selectTime('${t}',this)"`}>${t}</div>`;
+      }).join('');
     }
   }
 
